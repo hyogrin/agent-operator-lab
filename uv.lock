@@ -301,6 +301,8 @@ dependencies = [
     { name = "azure-ai-projects" },
     { name = "azure-core" },
     { name = "azure-identity" },
+    { name = "azure-mgmt-applicationinsights" },
+    { name = "azure-mgmt-loganalytics" },
     { name = "azure-mgmt-resource" },
     { name = "azure-monitor-opentelemetry" },
     { name = "azure-search-documents" },
@@ -326,6 +328,8 @@ requires-dist = [
     { name = "azure-ai-projects", specifier = "==2.0.0b2" },
     { name = "azure-core", specifier = "==1.37.0" },
     { name = "azure-identity", specifier = "==1.25.1" },
+    { name = "azure-mgmt-applicationinsights", specifier = "==4.1.0" },
+    { name = "azure-mgmt-loganalytics", specifier = "==13.1.1" },
     { name = "azure-mgmt-resource", specifier = "==24.0.0" },
     { name = "azure-monitor-opentelemetry", specifier = "==1.8.1" },
     { name = "azure-search-documents", specifier = "==11.5.2" },
@@ -767,6 +771,21 @@ wheels = [
 ]
 
 [[package]]
+name = "azure-mgmt-applicationinsights"
+version = "4.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "azure-common" },
+    { name = "azure-mgmt-core" },
+    { name = "isodate" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e7/8b/f3c8886ecd90d440458c4cc2b1db4ff47215f189cc3c0ba3cf11b7d4d64e/azure_mgmt_applicationinsights-4.1.0.tar.gz", hash = "sha256:15531390f12ce3d767cd3f1949af36aa39077c145c952fec4d80303c86ec7b6c", size = 323696, upload-time = "2025-03-06T08:50:52.14Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/45/f9f050523282d642598396ce9880b7b8be0d41545985935d2134199393b2/azure_mgmt_applicationinsights-4.1.0-py3-none-any.whl", hash = "sha256:9e71f29b01e505a773501451d12fd6a10482cf4b13e9ac2bff72f5380496d979", size = 616137, upload-time = "2025-03-06T08:50:54.044Z" },
+]
+
+[[package]]
 name = "azure-mgmt-core"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -776,6 +795,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/3e/99/fa9e7551313d8c7099c89ebf3b03cd31beb12e1b498d575aa19bb59a5d04/azure_mgmt_core-1.6.0.tar.gz", hash = "sha256:b26232af857b021e61d813d9f4ae530465255cb10b3dde945ad3743f7a58e79c", size = 30818, upload-time = "2025-07-03T02:02:24.093Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/26/c79f962fd3172b577b6f38685724de58b6b4337a51d3aad316a43a4558c6/azure_mgmt_core-1.6.0-py3-none-any.whl", hash = "sha256:0460d11e85c408b71c727ee1981f74432bc641bb25dfcf1bb4e90a49e776dbc4", size = 29310, upload-time = "2025-07-03T02:02:25.203Z" },
+]
+
+[[package]]
+name = "azure-mgmt-loganalytics"
+version = "13.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "azure-mgmt-core" },
+    { name = "isodate" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e4/01/d782a0e58a8cbf49afabef7872c029872b6e5b12d7a5f89d635f219795e3/azure_mgmt_loganalytics-13.1.1.tar.gz", hash = "sha256:4f971ee9d43fdc99e8299f44ca9f8f7a3b5f100be139fb0a9dac7efef8b698af", size = 134047, upload-time = "2026-01-05T09:52:25.827Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/30/041fcaac73e26b76f162bf1eee0bf5637bcb1b76f479bec077095f59d19a/azure_mgmt_loganalytics-13.1.1-py3-none-any.whl", hash = "sha256:73382d5036f478d3f6e856a0effc3637be2ebc782ab667fc45b25707edceaa55", size = 218285, upload-time = "2026-01-05T09:52:27.226Z" },
 ]
 
 [[package]]

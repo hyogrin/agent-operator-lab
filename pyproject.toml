@@ -35,7 +35,9 @@ dependencies = [
   "pyyaml~=6.0.2",
 
   # Azure Monitor & OpenTelemetry
+  "azure-mgmt-loganalytics==13.1.1",
   "azure-monitor-opentelemetry==1.8.1",
+  "azure-mgmt-applicationinsights==4.1.0",
 
   # Jupyter / Notebook Support
   "ipykernel>=6.29.0",
