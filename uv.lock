@@ -37,14 +37,14 @@ wheels = [
 
 [[package]]
 name = "agent-framework"
-version = "1.0.0b251218"
+version = "1.0.0b251223"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "agent-framework-core", extra = ["all"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/58/6b/d76d4c0800c9999271792a87f66cf42320ac31f358aae7d4d3b20f27bb18/agent_framework-1.0.0b251218.tar.gz", hash = "sha256:f0d882fb212ca165187648f5221a8e12da080123a888eaacf91acaa035fa67fc", size = 2823274, upload-time = "2025-12-19T01:46:41.416Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/ed/780cf840387bf0079933f1b3ac844d27566ae3f2af7b1167bf6e546f36bd/agent_framework-1.0.0b251223.tar.gz", hash = "sha256:e6ab017cb73f89cc67ed1a1568564b1c6e07c17b0433e7c8b7d1b53df02d20f4", size = 3144640, upload-time = "2025-12-24T05:41:27.188Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fe/8f/69be13f1352dc6a84d36dd95e654f200c5000600afb2a35b47fbbc6b0b79/agent_framework-1.0.0b251218-py3-none-any.whl", hash = "sha256:57a2cb28f10e2938c8805cdcd8711a18029e04065354a9d8a174152844581d09", size = 5553, upload-time = "2025-12-19T01:46:35.922Z" },
+    { url = "https://files.pythonhosted.org/packages/1b/e1/5ff5fe88ef03eb6bb8ac1e60c95c43a5d1ab7fd6ab431606e4a2131208c9/agent_framework-1.0.0b251223-py3-none-any.whl", hash = "sha256:ce6621ecf1da58877708698a1bceead5acd8bb5bd3b9a202c7608ff528ca63a4", size = 5550, upload-time = "2025-12-24T05:41:47.159Z" },
 ]
 
 [[package]]
@@ -90,7 +90,7 @@ wheels = [
 
 [[package]]
 name = "agent-framework-azure-ai"
-version = "1.0.0b251218"
+version = "1.0.0b251223"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "agent-framework-core" },
@@ -98,9 +98,9 @@ dependencies = [
     { name = "azure-ai-agents" },
     { name = "azure-ai-projects" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/15/0a/e15463600b85a4e743dcc16c203f788f274ee287a668210bde17794b8a9d/agent_framework_azure_ai-1.0.0b251218.tar.gz", hash = "sha256:30d9a033b10e5777ff1da99231836a97d532c7a71326522ae88f69ee17b1c347", size = 18718, upload-time = "2025-12-19T01:41:26.255Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3a/e2/93cecf6b7e7573bba3ce13143613508f079d943dcdc0945ee95c0b80c906/agent_framework_azure_ai-1.0.0b251223.tar.gz", hash = "sha256:08b657cb55d68b490c52c48c55282aabec7aa6b0863c51234dfe084600356de4", size = 18780, upload-time = "2025-12-24T05:41:52.397Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c7/d7/1107657a4892c2cd6613958ac290bd6e949303eec3ae5c9ecbacd20b7675/agent_framework_azure_ai-1.0.0b251218-py3-none-any.whl", hash = "sha256:4d05bfdd990a066a44eba7f216313ec04549707dd27e857ea358ccb4d03ca0eb", size = 20517, upload-time = "2025-12-19T01:46:46.879Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/d0/8336827a0385c9c8d50c0bc641925ea7accdf601d914feb839282e74a768/agent_framework_azure_ai-1.0.0b251223-py3-none-any.whl", hash = "sha256:aabdb2ecb193832edafb3e344d9eb67e4c4eb04bd4c7537b2549a034a53f2e8c", size = 20517, upload-time = "2025-12-24T05:41:53.872Z" },
 ]
 
 [[package]]
@@ -154,7 +154,7 @@ wheels = [
 
 [[package]]
 name = "agent-framework-core"
-version = "1.0.0b251218"
+version = "1.0.0b251223"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "azure-identity" },
@@ -168,9 +168,9 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b6/c8/6e06aad9fd2c5b083fc6796ef525230fa3f1dbbccac995b4fb2936ec0bb7/agent_framework_core-1.0.0b251218.tar.gz", hash = "sha256:96eaae38aaf895d8c24d568eac6dd3f56e525656a849baa3392226796c0dce3c", size = 3573210, upload-time = "2025-12-19T01:46:31.437Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5b/a0/280c879e5b61c9f2c3d78ebd6d8033fbf6d75767245d921a9f5fafe9641f/agent_framework_core-1.0.0b251223.tar.gz", hash = "sha256:3689d64f6ba21b8594e37f746c92eecc34069f42c38fa6fe06ddabed03237853", size = 315163, upload-time = "2025-12-24T05:41:46.354Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/7d/ae3416ed1bcb42f29587196cfc0c7bf0e57422c71165107b0f016aea94c3/agent_framework_core-1.0.0b251218-py3-none-any.whl", hash = "sha256:8e4610debfd8fac6757f9f01283f9bdf6f1640a05c5c57110e66ae26d4e935a6", size = 5685871, upload-time = "2025-12-19T01:41:22.42Z" },
+    { url = "https://files.pythonhosted.org/packages/2d/82/3a69d644530b4e30989fcaf8f091a8059f607df7fc2018d3aaa9795f0407/agent_framework_core-1.0.0b251223-py3-none-any.whl", hash = "sha256:6b6c5adb6bd546b71b6e1839029546595d67e296f29eb31f95e0b45474a8aa2f", size = 359830, upload-time = "2025-12-24T05:41:32.733Z" },
 ]
 
 [package.optional-dependencies]
@@ -320,9 +320,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "agent-framework", specifier = "==1.0.0b251218" },
-    { name = "agent-framework-azure-ai", specifier = "==1.0.0b251218" },
-    { name = "agent-framework-core", specifier = "==1.0.0b251218" },
+    { name = "agent-framework", specifier = "==1.0.0b251223" },
+    { name = "agent-framework-azure-ai", specifier = "==1.0.0b251223" },
+    { name = "agent-framework-core", specifier = "==1.0.0b251223" },
     { name = "azure-ai-evaluation", specifier = "==1.8.0" },
     { name = "azure-ai-inference", specifier = "==1.0.0b8" },
     { name = "azure-ai-projects", specifier = "==2.0.0b2" },
