@@ -1,0 +1,4 @@
+azure-ai-agentserver-agentframework==1.0.0b7
+agent-framework==1.0.0b260107
+
+azure-identity==1.25.1

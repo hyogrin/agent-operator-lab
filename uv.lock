@@ -296,6 +296,7 @@ dependencies = [
     { name = "agent-framework" },
     { name = "agent-framework-azure-ai" },
     { name = "agent-framework-core" },
+    { name = "azure-ai-agentserver-agentframework" },
     { name = "azure-ai-evaluation" },
     { name = "azure-ai-inference" },
     { name = "azure-ai-projects" },
@@ -323,6 +324,7 @@ requires-dist = [
     { name = "agent-framework", specifier = "==1.0.0b251223" },
     { name = "agent-framework-azure-ai", specifier = "==1.0.0b251223" },
     { name = "agent-framework-core", specifier = "==1.0.0b251223" },
+    { name = "azure-ai-agentserver-agentframework", specifier = "==1.0.0b7" },
     { name = "azure-ai-evaluation", specifier = "==1.8.0" },
     { name = "azure-ai-inference", specifier = "==1.0.0b8" },
     { name = "azure-ai-projects", specifier = "==2.0.0b2" },
@@ -633,6 +635,43 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ed/57/8adeed578fa8984856c67b4229e93a58e3f6024417d448d0037aafa4ee9b/azure_ai_agents-1.2.0b5.tar.gz", hash = "sha256:1a16ef3f305898aac552269f01536c34a00473dedee0bca731a21fdb739ff9d5", size = 394876, upload-time = "2025-09-30T01:55:02.328Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6d/6d/15070d23d7a94833a210da09d5d7ed3c24838bb84f0463895e5d159f1695/azure_ai_agents-1.2.0b5-py3-none-any.whl", hash = "sha256:257d0d24a6bf13eed4819cfa5c12fb222e5908deafb3cbfd5711d3a511cc4e88", size = 217948, upload-time = "2025-09-30T01:55:04.155Z" },
+]
+
+[[package]]
+name = "azure-ai-agentserver-agentframework"
+version = "1.0.0b7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "agent-framework-azure-ai" },
+    { name = "agent-framework-core" },
+    { name = "azure-ai-agentserver-core" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/21/f6/644930b9e34a8e6dca6a4c3adcf1c5e94ff36c1abb5e8a4a526c87b5bce7/azure_ai_agentserver_agentframework-1.0.0b7.tar.gz", hash = "sha256:681d4a8b9d0b30ff7b1a2960959490753f0775e0559698799629531d0362e39a", size = 33252, upload-time = "2025-12-07T19:34:28.308Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/39/2f/2f492ac82d6f4f75e0b03bdfaff08fd8835261dd29f3de8a156dd54cd241/azure_ai_agentserver_agentframework-1.0.0b7-py3-none-any.whl", hash = "sha256:fac3c1b7f3be660fff5e7656208ef63e91ec1fb3055daafb76adb7c102691ff9", size = 22217, upload-time = "2025-12-07T19:34:29.479Z" },
+]
+
+[[package]]
+name = "azure-ai-agentserver-core"
+version = "1.0.0b7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "azure-ai-agents" },
+    { name = "azure-ai-projects" },
+    { name = "azure-core" },
+    { name = "azure-identity" },
+    { name = "azure-monitor-opentelemetry" },
+    { name = "openai" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp-proto-http" },
+    { name = "starlette" },
+    { name = "uvicorn" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/eb/f7/6c08df3c503a16adef8c7bc1a4e4ceb5d27e31a172f0464a9720a9c0d565/azure_ai_agentserver_core-1.0.0b7.tar.gz", hash = "sha256:5652e732d0e299230de5d8ba474b6e3d5f6998155c8f0a3c984630447b90997c", size = 153982, upload-time = "2025-12-07T19:26:17.37Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5a/4e/08280801aefe89fcb730df83c85eb66033c396199a707c1826c60b526f05/azure_ai_agentserver_core-1.0.0b7-py3-none-any.whl", hash = "sha256:cfc1c20a6157a72809a5aad9ac33405171509462c4bfb5bb189ef92c3db5be91", size = 149985, upload-time = "2025-12-07T19:26:18.728Z" },
 ]
 
 [[package]]
@@ -2901,6 +2940,24 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e9/9d/22d241b66f7bbde88a3bfa6847a351d2c46b84de23e71222c6aae25c7050/opentelemetry_exporter_otlp_proto_common-1.39.1.tar.gz", hash = "sha256:763370d4737a59741c89a67b50f9e39271639ee4afc999dadfe768541c027464", size = 20409, upload-time = "2025-12-11T13:32:40.885Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8c/02/ffc3e143d89a27ac21fd557365b98bd0653b98de8a101151d5805b5d4c33/opentelemetry_exporter_otlp_proto_common-1.39.1-py3-none-any.whl", hash = "sha256:08f8a5862d64cc3435105686d0216c1365dc5701f86844a8cd56597d0c764fde", size = 18366, upload-time = "2025-12-11T13:32:20.2Z" },
+]
+
+[[package]]
+name = "opentelemetry-exporter-otlp-proto-grpc"
+version = "1.39.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "googleapis-common-protos" },
+    { name = "grpcio" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp-proto-common" },
+    { name = "opentelemetry-proto" },
+    { name = "opentelemetry-sdk" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/53/48/b329fed2c610c2c32c9366d9dc597202c9d1e58e631c137ba15248d8850f/opentelemetry_exporter_otlp_proto_grpc-1.39.1.tar.gz", hash = "sha256:772eb1c9287485d625e4dbe9c879898e5253fea111d9181140f51291b5fec3ad", size = 24650, upload-time = "2025-12-11T13:32:41.429Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/81/a3/cc9b66575bd6597b98b886a2067eea2693408d2d5f39dad9ab7fc264f5f3/opentelemetry_exporter_otlp_proto_grpc-1.39.1-py3-none-any.whl", hash = "sha256:fa1c136a05c7e9b4c09f739469cbdb927ea20b34088ab1d959a849b5cc589c18", size = 19766, upload-time = "2025-12-11T13:32:21.027Z" },
 ]
 
 [[package]]

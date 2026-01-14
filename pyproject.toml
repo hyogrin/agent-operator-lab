@@ -21,10 +21,11 @@ dependencies = [
   "azure-ai-evaluation==1.8.0",
   "azure-ai-inference==1.0.0b8",
   "azure-search-documents==11.5.2",
+  "azure-ai-agentserver-agentframework==1.0.0b7",
 
   # OpenAI
   "openai==2.13.0",
-
+  
   # HTTP Client
   "httpx>=0.24.1",
   "requests>=2.31.0",
