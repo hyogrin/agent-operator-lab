@@ -2,7 +2,7 @@ import os
 from agent_framework import ChatAgent, HostedWebSearchTool
 from agent_framework_azure_ai import AzureAIAgentClient
 from azure.ai.agentserver.agentframework import from_agent_framework
-from azure.identity import DefaultAzureCredential
+from azure.identity.aio import DefaultAzureCredential
 
 def create_agent() -> ChatAgent:
     """Create and return a ChatAgent with Bing Grounding search tool."""
@@ -17,8 +17,9 @@ def create_agent() -> ChatAgent:
     )
     
     chat_client = AzureAIAgentClient(
-        endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
+        project_endpoint=os.environ["AZURE_AI_PROJECT_ENDPOINT"],
         credential=DefaultAzureCredential(),
+        model_deployment_name=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
     )
 
     bing_search_tool = HostedWebSearchTool(
@@ -35,7 +36,7 @@ def create_agent() -> ChatAgent:
             "Use the Bing search tool to find up-to-date information and provide accurate, "
             "well-sourced answers. Always cite your sources when possible."
         ),
-        tools=[bing_search_tool],
+        tools=bing_search_tool,
     )
     return agent
 
