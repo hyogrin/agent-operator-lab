@@ -312,6 +312,7 @@ dependencies = [
     { name = "ipywidgets" },
     { name = "jupyter" },
     { name = "mcp" },
+    { name = "mcp-server-calculator" },
     { name = "openai" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
@@ -340,6 +341,7 @@ requires-dist = [
     { name = "ipywidgets", specifier = "==8.1.5" },
     { name = "jupyter", specifier = ">=1.0.0" },
     { name = "mcp", specifier = ">=1.24.0" },
+    { name = "mcp-server-calculator", specifier = "==0.2.0" },
     { name = "openai", specifier = "==2.13.0" },
     { name = "python-dotenv", specifier = "==1.1.1" },
     { name = "pyyaml", specifier = "~=6.0.2" },
@@ -2419,6 +2421,18 @@ wheels = [
 [package.optional-dependencies]
 ws = [
     { name = "websockets" },
+]
+
+[[package]]
+name = "mcp-server-calculator"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "mcp" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4b/77/ffdd2e2de2c8f0e3c7faa75cffc756ed8a15ab8c2823786a5c58c0249914/mcp_server_calculator-0.2.0.tar.gz", hash = "sha256:cc51c324c92617324bc3991f5c450d25839b942c0adfc9d0d8f3c522179c5105", size = 15589, upload-time = "2025-05-10T02:26:58.749Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/87/09/1614e8b4bdecfff6c908be003265957bbce7838470b31dbccec9a02d92bd/mcp_server_calculator-0.2.0-py3-none-any.whl", hash = "sha256:33e2e95c320cf7c33fbc478a0a165aedd2f05f05fa7f39e1c64329d41fea1026", size = 4243, upload-time = "2025-05-10T02:26:57.182Z" },
 ]
 
 [[package]]

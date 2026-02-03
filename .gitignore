@@ -209,3 +209,5 @@ __marimo__/
 reference/*
 
 .foundry_config.json
+
+benchmark_results_*

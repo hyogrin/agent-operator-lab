@@ -1,0 +1,23 @@
+id: basic-relevance
+
+display_name: Basic Relevance Check
+
+description: Evaluates whether agent responses are relevant to the user query
+
+dataset:
+  items:
+    - query: "What is the return policy for online purchases?"
+      context: "Customer service inquiry"
+      ground_truth: "Return within 30 days with receipt"
+    - query: "How do I reset my password?"
+      context: "Technical support"
+      ground_truth: "Go to settings and click reset password"
+    - query: "What are the available payment methods?"
+      context: "Sales inquiry"
+      ground_truth: "Credit card, PayPal, bank transfer"
+
+evaluators:
+  - name: Relevance
+    type: relevance
+    initialization_parameters:
+      deployment_name: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}

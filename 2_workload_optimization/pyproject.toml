@@ -44,7 +44,4 @@ dependencies = [
   "ipykernel>=6.29.0",
   "jupyter>=1.0.0",
   "ipywidgets==8.1.5",
-
-  "mcp-server-calculator==0.2.0",
-
 ]
