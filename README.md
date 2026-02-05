@@ -9,6 +9,10 @@ The focus is practical: create (or point to) a Foundry project, run lightweight 
 - [1_controlplane/1_foundry_agent_monitoring.ipynb](1_controlplane/1_foundry_agent_monitoring.ipynb): Control Plane checks with the Foundry SDK (list deployed agents, inspect assets like connections, and understand where quota is managed).
 - [1_controlplane/2_ms_agent_framework_connect_foundry.ipynb](1_controlplane/2_ms_agent_framework_connect_foundry.ipynb): Connect **MS Agent Framework** agents using `AzureAIClient`, including conversation/thread linkage and tracing verification in the Foundry portal.
 - [1_controlplane/3_hosted_agent_connect_foundry.ipynb](1_controlplane/3_hosted_agent_connect_foundry.ipynb): Package agents as containers, push to ACR, and register **Hosted Agents** using the Hosting Adapter (with sample agents under `1_controlplane/1.1_hosted-agent_sdk/`).
+- [1_controlplane/4_agent_fleet_management.ipynb](1_controlplane/4_agent_fleet_management.ipynb): Batch registration of agents/workflows and real-time simulation with live metrics tracking in Azure AI Foundry.
+- [2_workload_optimization/1_context_optimization.ipynb](2_workload_optimization/1_context_optimization.ipynb): Context optimization strategies using MCP and code execution—comparing anti-patterns vs best practices for efficient token usage.
+- [2_workload_optimization/2_new_model_comparison.ipynb](2_workload_optimization/2_new_model_comparison.ipynb): Model comparison and benchmarking (latency, token usage, cost efficiency, accuracy) with the Azure OpenAI Responses API.
+- [2_workload_optimization/3_model_migration.ipynb](2_workload_optimization/3_model_migration.ipynb): Model migration workflow (e.g., GPT-4.x → GPT-5.x) with APIM weighted routing (canary rollout) and acceptance criteria analysis.
 
 ## Prerequisites
 
@@ -46,6 +50,10 @@ Note: authentication is typically done via `DefaultAzureCredential` (e.g., `az l
 2. Run [1_controlplane/1_foundry_agent_monitoring.ipynb](1_controlplane/1_foundry_agent_monitoring.ipynb) for basic fleet/assets checks.
 3. Run [1_controlplane/2_ms_agent_framework_connect_foundry.ipynb](1_controlplane/2_ms_agent_framework_connect_foundry.ipynb) to connect MS Agent Framework agents and verify tracing.
 4. Run [1_controlplane/3_hosted_agent_connect_foundry.ipynb](1_controlplane/3_hosted_agent_connect_foundry.ipynb) to build/push container images and register Hosted Agents.
+5. Run [1_controlplane/4_agent_fleet_management.ipynb](1_controlplane/4_agent_fleet_management.ipynb) to batch-register agents/workflows and run real-time simulations.
+6. Run [2_workload_optimization/1_context_optimization.ipynb](2_workload_optimization/1_context_optimization.ipynb) to learn context optimization patterns with MCP.
+7. Run [2_workload_optimization/2_new_model_comparison.ipynb](2_workload_optimization/2_new_model_comparison.ipynb) to benchmark and compare models.
+8. Run [2_workload_optimization/3_model_migration.ipynb](2_workload_optimization/3_model_migration.ipynb) to practice weighted routing for model migration.
 
 ## Hosted Agent Samples
 
