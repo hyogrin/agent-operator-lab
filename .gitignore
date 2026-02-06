@@ -211,7 +211,9 @@ reference/*
 .foundry_config.json
 
 benchmark_results_*
-
 apim_migration_policy.xml
-
 apim_policy_payload.json
+
+routing_policy_*
+routing_results_*
+
