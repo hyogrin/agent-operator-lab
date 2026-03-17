@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  recommendation_contexts.xml
+  사용자 문의(inquiry) 유형별 추천 제품 3개의 정보.
+  intent=recommendation 시 LLM context로 제공됩니다.
+  출처: amore.com / 이니스프리·COSRX·라네즈 공식 제품 정보 기반 합성 데이터
+-->
+<recommendations>
+  <inquiry_context>
+    <description>모공 케어, 수분 공급, 눈가 탄력 등 다양한 피부 고민에 대응하는 추천 제품 3종</description>
+    <target_skin_types>
+      <skin_type>지성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>중성</skin_type>
+      <skin_type>건성</skin_type>
+      <skin_type>민감성</skin_type>
+    </target_skin_types>
+  </inquiry_context>
+
+  <product rank="1" id="INNISFREE-VSP-001">
+    <brand>이니스프리 (Innisfree)</brand>
+    <name>수퍼 화산송이 모공 마스크</name>
+    <name_en>Super Volcanic Pore Clay Mask</name_en>
+    <category>마스크/팩</category>
+    <sub_category>클레이 마스크</sub_category>
+    <volume>100ml</volume>
+    <price currency="KRW">15000</price>
+
+    <skin_types>
+      <skin_type>지성</skin_type>
+      <skin_type>복합성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>모공 축소 및 정돈</concern>
+      <concern>피지 조절</concern>
+      <concern>블랙헤드 제거</concern>
+      <concern>딥클렌징</concern>
+      <concern>피부결 개선</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>제주 화산송이 (Jeju Volcanic Scoria)</name>
+        <benefit>모공 속 노폐물 및 피지 흡착, 피부 정화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>카올린 (Kaolin Clay)</name>
+        <benefit>피지 흡수, 피부 정화, 모공 수렴</benefit>
+      </ingredient>
+      <ingredient>
+        <name>제주 녹차 추출물 (Jeju Green Tea Extract)</name>
+        <benefit>항산화, 피부 진정, 피지 조절</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid)</name>
+        <benefit>마스크 후 피부 수분 유지</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 후 물기를 제거하고 얼굴에 적당량을 균일하게 도포합니다.</step>
+      <step order="2">눈, 입 주변을 피하여 얼굴 전체에 바릅니다.</step>
+      <step order="3">15분간 유지한 후 미온수로 깨끗이 세안합니다.</step>
+      <recommended_frequency>주 1~2회</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.7</average_score>
+      <max_score>5.0</max_score>
+      <review_count>12500</review_count>
+      <highlights>
+        <highlight>모공 즉각 개선 효과</highlight>
+        <highlight>피지 조절력 우수</highlight>
+        <highlight>사용 후 피부 매끄러움</highlight>
+        <highlight>합리적인 가격</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>제주 화산송이의 뛰어난 피지 흡착력으로 모공 케어에 최적화</reason>
+      <reason>지성 및 복합성 피부의 피지 고민 해결에 탁월</reason>
+      <reason>주 1~2회 사용으로 꾸준한 모공 관리 가능</reason>
+      <reason>합리적인 가격으로 지속적인 사용 부담 없음</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>이니스프리 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>네이버쇼핑</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="2" id="COSRX-AHA-BHA-001">
+    <brand>코스알엑스 (COSRX)</brand>
+    <name>AHA/BHA 클래리파잉 트리트먼트 토너</name>
+    <name_en>AHA/BHA Clarifying Treatment Toner</name_en>
+    <category>스킨/토너</category>
+    <sub_category>각질 케어 토너</sub_category>
+    <volume>150ml</volume>
+    <price currency="KRW">22000</price>
+
+    <skin_types>
+      <skin_type>지성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>트러블성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>각질 제거</concern>
+      <concern>모공 정돈</concern>
+      <concern>트러블 케어</concern>
+      <concern>피부 투명도 향상</concern>
+      <concern>피지 조절</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>AHA (알파하이드록시산, Alpha Hydroxy Acid)</name>
+        <concentration>0.1%</concentration>
+        <benefit>표피 각질 제거, 피부 재생 촉진, 피부 밝기 향상</benefit>
+      </ingredient>
+      <ingredient>
+        <name>BHA (베타하이드록시산, Salicylic Acid)</name>
+        <concentration>0.1%</concentration>
+        <benefit>모공 속 피지 용해, 블랙헤드 제거, 항염 효과</benefit>
+      </ingredient>
+      <ingredient>
+        <name>판테놀 (Panthenol, Vitamin B5)</name>
+        <benefit>보습, 피부 진정, 피부 장벽 강화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>나이아신아마이드 (Niacinamide)</name>
+        <benefit>피부 밝기 개선, 모공 축소, 피지 조절</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 후 화장솜에 적당량을 덜어 결 방향으로 부드럽게 닦아냅니다.</step>
+      <step order="2">또는 손바닥에 덜어 가볍게 두드려 흡수시킵니다.</step>
+      <step order="3">이후 세럼, 수분 크림 순으로 마무리합니다.</step>
+      <recommended_frequency>매일 1회 (저녁 권장)</recommended_frequency>
+    </how_to_use>
+
+    <texture>맑고 가벼운 액상 타입</texture>
+
+    <ratings>
+      <average_score>4.6</average_score>
+      <max_score>5.0</max_score>
+      <review_count>8300</review_count>
+      <highlights>
+        <highlight>각질 제거 효과 우수</highlight>
+        <highlight>트러블 케어에 효과적</highlight>
+        <highlight>피부 투명도 향상</highlight>
+        <highlight>자극 없는 순한 성분</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>AHA와 BHA를 함께 함유해 각질과 모공 속 피지를 동시에 케어</reason>
+      <reason>트러블성 피부의 피부결 개선에 탁월한 효과</reason>
+      <reason>매일 사용 가능한 저농도 설계로 피부 부담 최소화</reason>
+      <reason>미백 효과와 모공 케어를 동시에 원하는 분께 추천</reason>
+    </recommendation_reasons>
+
+    <cautions>
+      <caution>사용 후 자외선 차단제를 반드시 사용하세요.</caution>
+      <caution>처음 사용 시 격일 사용으로 피부 적응 후 매일 사용하세요.</caution>
+    </cautions>
+
+    <purchase_info>
+      <channels>
+        <channel>코스알엑스 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>네이버쇼핑</channel>
+        <channel>글로벌 Amazon</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="3" id="LANEIGE-WSM-001">
+    <brand>라네즈 (LANEIGE)</brand>
+    <name>워터 슬리핑 마스크</name>
+    <name_en>Water Sleeping Mask</name_en>
+    <category>마스크/팩</category>
+    <sub_category>수면 마스크</sub_category>
+    <volume>70ml</volume>
+    <price currency="KRW">35000</price>
+
+    <skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>중성</skin_type>
+      <skin_type>민감성</skin_type>
+      <skin_type>복합성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>집중 보습</concern>
+      <concern>수분 장벽 강화</concern>
+      <concern>피부 진정</concern>
+      <concern>피부 재생</concern>
+      <concern>피부 탄력 개선</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>청수 복합체 (Moisture Wrap™)</name>
+        <benefit>수분 공급 및 피부 수분 장벽 강화, 수분 증발 억제</benefit>
+      </ingredient>
+      <ingredient>
+        <name>수련꽃 추출물 (White Water Lily Extract)</name>
+        <benefit>피부 진정, 항산화, 피부 톤 정돈</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid, 4종)</name>
+        <benefit>다층 수분 공급 — 표피부터 진피까지 깊은 보습</benefit>
+      </ingredient>
+      <ingredient>
+        <name>글리세린 (Glycerin)</name>
+        <benefit>수분 유지, 피부 보습막 형성</benefit>
+      </ingredient>
+      <ingredient>
+        <name>EGCG (에피갈로카테킨갈레이트)</name>
+        <benefit>강력한 항산화 효과, 피부 노화 방지</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">저녁 스킨케어 마지막 단계에 사용합니다.</step>
+      <step order="2">적당량(1~2회 펌프)을 덜어 얼굴에 골고루 도포합니다.</step>
+      <step order="3">수면 중 피부가 충분히 흡수할 수 있도록 그대로 두세요.</step>
+      <step order="4">다음 날 아침 미온수로 부드럽게 세안합니다.</step>
+      <recommended_frequency>매일 밤 (수면 마스크로 사용)</recommended_frequency>
+      <best_time>취침 전 스킨케어 마지막 단계</best_time>
+    </how_to_use>
+
+    <texture>젤 크림 타입 (무겁지 않은 가벼운 제형)</texture>
+    <scent>은은한 꽃향기</scent>
+    <finish>촉촉하고 매끄러운 마무리</finish>
+
+    <certifications>
+      <certification>피부과 테스트 완료</certification>
+      <certification>알레르기 테스트 완료</certification>
+      <certification>비자극성 테스트 완료</certification>
+    </certifications>
+
+    <ratings>
+      <average_score>4.9</average_score>
+      <max_score>5.0</max_score>
+      <review_count>28000</review_count>
+      <highlights>
+        <highlight>하룻밤 사용 후 확연한 피부 수분감 개선</highlight>
+        <highlight>산뜻하고 가벼운 제형</highlight>
+        <highlight>다음 날 아침 탱탱한 피부</highlight>
+        <highlight>민감한 피부도 자극 없이 사용 가능</highlight>
+        <highlight>꾸준한 사용으로 피부 탄력 향상</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>수면 중 피부가 스스로 회복하는 시간에 집중 보습을 제공</reason>
+      <reason>건성 및 수분 부족 피부의 밤 케어에 최적화</reason>
+      <reason>민감한 피부도 부담 없이 사용할 수 있는 저자극 설계</reason>
+      <reason>눈가 주름 개선을 위한 밤 보습 루틴으로 효과적</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>라네즈 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>아모레몰</channel>
+        <channel>쿠팡</channel>
+        <channel>세포라 (국내외)</channel>
+        <channel>네이버쇼핑</channel>
+      </channels>
+    </purchase_info>
+  </product>
+</recommendations>

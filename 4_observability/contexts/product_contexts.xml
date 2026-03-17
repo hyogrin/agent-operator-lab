@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  product_contexts.xml
+  마몽드 플래시토닝 데이지 리퀴드 마스크의 상세 제품 스펙.
+  intent=product_search 시 LLM context로 제공됩니다.
+  출처: amore.com / 마몽드 공식 제품 정보 기반 합성 데이터
+-->
+<products>
+  <product id="MAMONDE-FTD-001">
+    <brand>마몽드 (Mamonde)</brand>
+    <name>플래시토닝 데이지 리퀴드 마스크</name>
+    <name_en>Flash Toning Daisy Liquid Mask</name_en>
+    <category>마스크/팩</category>
+    <sub_category>액상 마스크</sub_category>
+    <volume>100ml</volume>
+    <price currency="KRW">30000</price>
+
+    <skin_types>
+      <skin_type>중성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>지성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>모공 정돈</concern>
+      <concern>피부결 개선</concern>
+      <concern>각질 제거</concern>
+      <concern>피부 투명도 향상</concern>
+      <concern>피지 조절</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>데이지꽃 추출물 (Daisy Flower Extract)</name>
+        <concentration>10%</concentration>
+        <benefit>피부 밝기 개선, 항산화, 피부 톤 균일화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>PHA (폴리하이드록시산, Polyhydroxy Acid)</name>
+        <concentration>10%</concentration>
+        <benefit>순한 각질 제거, 모공 정돈, 피부결 개선. AHA보다 분자가 커서 피부 자극이 적음</benefit>
+      </ingredient>
+      <ingredient>
+        <name>나이아신아마이드 (Niacinamide)</name>
+        <concentration>5%</concentration>
+        <benefit>미백 효과, 모공 축소, 피지 조절, 피부 장벽 강화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>알로에베라 (Aloe Vera)</name>
+        <concentration>3%</concentration>
+        <benefit>진정, 보습, 피부 쿨링 효과</benefit>
+      </ingredient>
+      <ingredient>
+        <name>베타글루칸 (Beta-Glucan)</name>
+        <concentration>2%</concentration>
+        <benefit>면역 강화, 수분 공급, 피부 장벽 보호</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <full_ingredients>정제수, 나이아신아마이드, 데이지꽃추출물, PHA(폴리하이드록시산), 부틸렌글라이콜, 글리세린, 알로에베라잎즙, 베타글루칸, 판테놀, 알란토인, 히알루론산나트륨, 카보머, 트로메타민, 에틸헥실글리세린, 페녹시에탄올</full_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 후 스킨케어 첫 단계에서 사용합니다.</step>
+      <step order="2">화장솜에 적당량(2~3ml)을 덜어 얼굴에 부드럽게 도포합니다.</step>
+      <step order="3">15~20분간 유지 후 미온수로 깨끗이 세안합니다.</step>
+      <step order="4">세안 후 토너, 세럼, 크림 순으로 마무리합니다.</step>
+      <recommended_frequency>주 2~3회</recommended_frequency>
+      <best_time>저녁 세안 후</best_time>
+    </how_to_use>
+
+    <texture>액상형, 화장솜 적용 방식</texture>
+    <scent>무향</scent>
+    <finish>촉촉하고 가벼운 마무리</finish>
+
+    <certifications>
+      <certification>EWG 그린 등급 성분</certification>
+      <certification>피부과 테스트 완료</certification>
+      <certification>알레르기 테스트 완료</certification>
+      <certification>비건 인증 (PETA)</certification>
+    </certifications>
+
+    <cautions>
+      <caution>처음 사용 시 팔 안쪽에 패치 테스트를 권장합니다.</caution>
+      <caution>사용 후 자외선 차단제를 반드시 사용해 주세요.</caution>
+      <caution>눈 주변을 피해 사용하세요.</caution>
+      <caution>피부 이상 발생 시 즉시 사용을 중단하고 전문의와 상담하세요.</caution>
+      <caution>어린이 손이 닿지 않는 곳에 보관하세요.</caution>
+    </cautions>
+
+    <storage>
+      <condition>직사광선 및 고온 다습한 곳을 피해 보관</condition>
+      <shelf_life_unopened>36개월</shelf_life_unopened>
+      <shelf_life_opened>개봉 후 12개월 이내 사용</shelf_life_opened>
+    </storage>
+
+    <ratings>
+      <average_score>4.8</average_score>
+      <max_score>5.0</max_score>
+      <review_count>411</review_count>
+      <highlights>
+        <highlight>모공 개선 효과 탁월</highlight>
+        <highlight>피부결 즉각 정돈</highlight>
+        <highlight>자극 없는 순한 사용감</highlight>
+        <highlight>화장솜에 사용하기 편리</highlight>
+      </highlights>
+    </ratings>
+
+    <purchase_info>
+      <channels>
+        <channel>아모레몰 (amoremall.com)</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>네이버쇼핑</channel>
+        <channel>마몽드 공식 홈페이지</channel>
+      </channels>
+      <availability>국내 전 유통채널 구매 가능</availability>
+    </purchase_info>
+
+    <faq>
+      <item>
+        <question>민감성 피부에도 사용 가능한가요?</question>
+        <answer>PHA 성분이 AHA보다 자극이 적어 민감성 피부에도 비교적 순하지만, 처음 사용 시 패치 테스트를 권장합니다.</answer>
+      </item>
+      <item>
+        <question>매일 사용해도 되나요?</question>
+        <answer>주 2~3회 사용을 권장하며, 매일 사용보다는 격일 사용이 피부 부담을 줄일 수 있습니다.</answer>
+      </item>
+      <item>
+        <question>임산부도 사용 가능한가요?</question>
+        <answer>임산부 및 수유 중인 경우 사용 전 의사와 상담하시기 바랍니다.</answer>
+      </item>
+    </faq>
+  </product>
+</products>
