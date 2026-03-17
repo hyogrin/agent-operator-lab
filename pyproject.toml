@@ -23,6 +23,9 @@ dependencies = [
   "azure-search-documents==11.5.2",
   "azure-ai-agentserver-agentframework==1.0.0b7",
 
+  # Semantic Kernel
+  "semantic-kernel[azure]>=1.28.0",
+
   # OpenAI
   "openai==2.13.0",
   
