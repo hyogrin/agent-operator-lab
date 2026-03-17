@@ -219,3 +219,4 @@ routing_results_*
 grafana_dashboard.json
 
 4_observability/log/*
+!4_observability/log/query_data_1.csv
