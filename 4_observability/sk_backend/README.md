@@ -2,6 +2,8 @@
 
 A **Semantic Kernel 1.41 + FastAPI** backend that powers the beauty/cosmetics chatbot from the `2_evaluation_pipeline.ipynb` notebook. It classifies user intent, selects the appropriate XML context file, and generates LLM-grounded answers via Azure OpenAI.
 
+The evaluation pipeline uses the **Azure AI Foundry Evals API** (`azure-ai-projects>=2.0.1`) with code-based custom evaluators registered in the Foundry catalog and builtin evaluators (groundedness, coherence, relevance) for quality scoring.
+
 ## Architecture
 
 ```
@@ -273,6 +275,7 @@ Navigate to **Application Insights → Live metrics** to see real-time request r
 | Component | Version |
 |-----------|---------|
 | Semantic Kernel | 1.41.0 |
+| Azure AI Projects SDK | ≥ 2.0.1 |
 | FastAPI | ≥ 0.115.0 |
 | Uvicorn | ≥ 0.30.0 |
 | Python | ≥ 3.12 |
@@ -281,7 +284,27 @@ Navigate to **Application Insights → Live metrics** to see real-time request r
 
 ## Evaluation Pipeline Integration
 
-The `2_evaluation_pipeline.ipynb` notebook consumes this backend's API to run a multi-stage evaluation pipeline using the Azure AI Evaluation SDK.
+The `2_evaluation_pipeline.ipynb` notebook consumes this backend's API to run a multi-stage evaluation pipeline using the **Azure AI Foundry Evals API** (`azure-ai-projects>=2.0.1`).
+
+### Prerequisites
+
+| Requirement | Description |
+|-------------|-------------|
+| `azure-ai-projects>=2.0.1` | Required SDK for Foundry evaluator catalog and Evals API |
+| **Azure AI Developer** role | Required on the Foundry resource for evaluator registration and eval creation |
+| **Cognitive Services Contributor** role | Required on the Foundry resource for server-side eval runs (`temporaryDataReference`) |
+| `APPLICATIONINSIGHTS_RESOURCE_ID` | Application Insights resource ID (for trace-based evaluation) |
+
+> **Important**: To enable server-side evaluation runs with Foundry portal `report_url`, your identity needs the following roles on the **Foundry resource** (`Microsoft.CognitiveServices/accounts`). Without these roles, the notebook automatically falls back to local evaluation mode (LLM-as-judge via the Foundry OpenAI client).
+>
+> | Role | Purpose |
+> |------|--------|
+> | **Azure AI Developer** | Register custom evaluators, create eval objects, call OpenAI Evals API |
+> | **Cognitive Services Contributor** | Write to internal asset store for eval run data (`temporaryDataReference`) |
+>
+> Assign via: **Azure Portal** → Foundry resource → **Access control (IAM)** → **Add role assignment** → select each role → select your user.
+>
+> In the new Foundry architecture, there is no separate storage account — the asset store is managed internally by the Foundry resource.
 
 ### Evaluation Pipeline Flow
 
@@ -294,22 +317,42 @@ golden_user_query_list.jsonl (50 labeled queries)
          ▼
 llm_result_list.jsonl (predictions + XML context + LLM response)
          │
-         ├──► Step 1: Intent Accuracy   (custom exact match)
-         ├──► Step 2: Agent Relevance   (custom evaluator)
-         ├──► Step 3: Method Relevance  (custom evaluator)
-         ├──► Step 4a: Retrieval        (pre-built, query vs context)
-         └──► Step 4b: Groundedness     (pre-built, response vs context)
+         ▼
+project_client.beta.evaluators.create_version()
+  → Register code-based evaluators in Foundry Catalog
+         │
+         ▼
+openai_client.evals.create() + evals.runs.create()
+  → Run 6 evaluators (3 custom + 3 builtin) server-side
+         │
+         ├──► Steps 1-3: Exact-match (intent, agent, method)
+         └──► Step 4: LLM-based (groundedness, coherence, relevance)
+         │
+         ▼
+report_url → Foundry Portal + HTML Dashboard
 ```
 
 ### Evaluation Steps
 
-| Step | Evaluator | Metric | What it measures |
-|------|-----------|--------|------------------|
-| 1 | `IntentAccuracyEvaluator` (custom) | `intent_accuracy` | Intent classification exact match |
-| 2 | `AgentRelevanceEvaluator` (custom) | `agent_relevance` | Correct agent selected for the intent |
-| 3 | `MethodRelevanceEvaluator` (custom) | `method_relevance` | Correct method called on the agent |
-| 4a | `RetrievalEvaluator` (pre-built) | `retrieval` | XML context relevance to query (1-5) |
-| 4b | `GroundednessEvaluator` (pre-built) | `groundedness` | Response faithfulness to XML context (1-5) |
+| Step | Evaluator | Type | Metric | What It Measures |
+|------|-----------|------|--------|------------------|
+| 1 | `intent_accuracy` | Custom (code-based) | 0.0 / 1.0 | Intent classification exact match |
+| 2 | `agent_relevance` | Custom (code-based) | 0.0 / 1.0 | Correct agent selected for the intent |
+| 3 | `method_relevance` | Custom (code-based) | 0.0 / 1.0 | Correct method called on the agent |
+| 4a | `groundedness` | Builtin | 1–5 | Response faithfulness to XML context |
+| 4b | `coherence` | Builtin | 1–5 | Response logical consistency |
+| 4c | `relevance` | Builtin | 1–5 | Response relevance to user query |
+
+### Key SDK APIs Used
+
+| SDK | Method | Purpose |
+|-----|--------|---------|
+| `azure-ai-projects` | `AIProjectClient` | Foundry project client |
+| `azure-ai-projects` | `project_client.beta.evaluators.create_version()` | Register custom evaluators in catalog |
+| `openai` (via Foundry) | `openai_client.evals.create()` | Create evaluation group |
+| `openai` (via Foundry) | `openai_client.evals.runs.create()` | Run evaluation with JSONL data |
+| `openai` (via Foundry) | `openai_client.evals.runs.output_items.list()` | Retrieve per-row results |
+| `openai` (via Foundry) | `openai_client.files.create()` | Upload JSONL data file |
 
 ### Data Files
 
@@ -317,7 +360,18 @@ llm_result_list.jsonl (predictions + XML context + LLM response)
 |------|---------|
 | `log/golden_user_query_list.jsonl` | 50 labeled queries (expected intent/agent/method) |
 | `log/llm_result_list.jsonl` | SK Backend results (predictions + context + response) |
-| `log/eval_step*.json` | Per-step evaluation results |
+| `log/eval_upload.jsonl` | Formatted JSONL uploaded to Foundry for eval runs |
+| `log/eval_summary.json` | Aggregated evaluation metrics |
+| `log/eval_dashboard.html` | Self-contained HTML dashboard with per-row results |
+
+### Execution Modes
+
+The notebook supports two evaluation modes, automatically selecting the best available option:
+
+| Mode | Trigger | Evaluators | Results |
+|------|---------|-----------|---------|
+| **Foundry (server-side)** | Azure AI Developer role assigned | 3 custom + 3 builtin run server-side | Foundry portal `report_url` + HTML dashboard |
+| **Local (fallback)** | 403 on `temporaryDataReference` | Steps 1-3 exact-match + Steps 4 LLM-as-judge | HTML dashboard only |
 
 ### How Context Flows Through Evaluation
 
@@ -334,9 +388,10 @@ POST /chat → SK Backend classifies intent
     ▼
 llm_result_list.jsonl
     │
-    ├── "context" field  → XML content (for Retrieval & Groundedness)
-    └── "response" field → LLM answer (for Groundedness)
+    ├── "context" field  → XML content (for Groundedness)
+    └── "response" field → LLM answer (for Coherence & Relevance)
 ```
 
-- **Retrieval (4a)**: Did the intent-based routing select the *right* XML context for the query?
-- **Groundedness (4b)**: Did the LLM answer stay *faithful* to the XML context without hallucinating?
+- **Groundedness (4a)**: Did the LLM answer stay *faithful* to the XML context without hallucinating?
+- **Coherence (4b)**: Is the response logically consistent and well-structured?
+- **Relevance (4c)**: Did the response directly address the user's query?

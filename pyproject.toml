@@ -17,7 +17,7 @@ dependencies = [
   "azure-mgmt-resource==24.0.0",
 
   # Azure AI Services
-  "azure-ai-projects==2.0.0b2",
+  "azure-ai-projects==2.0.1",
   "azure-ai-evaluation==1.16.1",
   "azure-ai-inference==1.0.0b8",
   "azure-search-documents==11.5.2",
