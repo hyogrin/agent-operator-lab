@@ -3,7 +3,8 @@
   recommendation_contexts.xml
   사용자 문의(inquiry) 유형별 추천 제품 3개의 정보.
   intent=recommendation 시 LLM context로 제공됩니다.
-  출처: amore.com / 이니스프리·COSRX·라네즈 공식 제품 정보 기반 합성 데이터
+  출처: amore.com / 아모레퍼시픽 공식 제품 정보 기반 합성 데이터
+  브랜드: 이니스프리, COSRX, 라네즈, 설화수, 헤라, 에스트라, 한율, 에뛰드
 -->
 <recommendations>
   <inquiry_context>
@@ -279,4 +280,692 @@
       </channels>
     </purchase_info>
   </product>
+
+  <!-- ============================================================ -->
+  <!-- Inquiry Set 2: 안티에이징 & 리프팅 고민 추천 (40~60대 타겟)     -->
+  <!-- 출처: 동아일보 '2023년 아모레퍼시픽 베스트 상품 7' 기반 합성    -->
+  <!-- ============================================================ -->
+  <inquiry_context id="antiaging">
+    <description>안티에이징, 주름 개선, 피부 리프팅 고민에 대응하는 프리미엄 추천 제품 3종</description>
+    <target_skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>중성</skin_type>
+      <skin_type>복합성</skin_type>
+    </target_skin_types>
+  </inquiry_context>
+
+  <product rank="1" id="SULWHASOO-JS-001">
+    <brand>설화수 (Sulwhasoo)</brand>
+    <name>진설크림</name>
+    <name_en>Concentrated Ginseng Renewing Cream</name_en>
+    <category>스킨케어</category>
+    <sub_category>크림</sub_category>
+    <volume>60ml</volume>
+    <price currency="KRW">340000</price>
+
+    <skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>중성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>주름 개선</concern>
+      <concern>피부 탄력 강화</concern>
+      <concern>피부 리프팅</concern>
+      <concern>안티에이징</concern>
+      <concern>피부 윤기 부여</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>진생베리 SR™ (Ginseng Berry SR™)</name>
+        <benefit>진생베리 추출액 600kg 중 1g에만 존재하는 안티에이징 성분. 피부 노폐물 제거 및 리프팅</benefit>
+      </ingredient>
+      <ingredient>
+        <name>홍삼 추출물 (Red Ginseng Extract)</name>
+        <benefit>피부 재생 촉진, 탄력 강화, 항산화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>인삼사포닌 (Ginsenoside)</name>
+        <benefit>콜라겐 합성 촉진, 주름 개선, 피부 밀도 향상</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">토너, 에센스 후 적당량을 덜어 얼굴에 골고루 바릅니다.</step>
+      <step order="2">눈꼬리, 애플존, 입꼬리, 턱 등 처짐이 신경 쓰이는 부위에 리프팅하듯 도포합니다.</step>
+      <step order="3">양손으로 감싸듯 가볍게 흡수시킵니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.8</average_score>
+      <max_score>5.0</max_score>
+      <review_count>4120</review_count>
+      <highlights>
+        <highlight>눈꼬리·입꼬리 리프팅 효과 체감</highlight>
+        <highlight>고급스러운 한방 향</highlight>
+        <highlight>장기 사용 시 피부 탄력 개선</highlight>
+        <highlight>선물용으로 인기 만점</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>설화수 하이엔드 라인의 핵심 제품으로 안티에이징 효과 입증</reason>
+      <reason>진생베리 SR™의 독자적 리프팅 기술로 피부 각도 7도 개선 효과</reason>
+      <reason>40~60대 피부 고민에 최적화된 프리미엄 크림</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>설화수 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>백화점 설화수 카운터</channel>
+        <channel>면세점</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="2" id="SULWHASOO-JSEYE-001">
+    <brand>설화수 (Sulwhasoo)</brand>
+    <name>진설아이크림</name>
+    <name_en>Concentrated Ginseng Renewing Eye Cream</name_en>
+    <category>스킨케어</category>
+    <sub_category>아이크림</sub_category>
+    <volume>20ml</volume>
+    <price currency="KRW">195000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>눈가 주름</concern>
+      <concern>눈가 탄력 저하</concern>
+      <concern>다크서클</concern>
+      <concern>눈가 처짐</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>진생베리 SR™ (Ginseng Berry SR™)</name>
+        <benefit>눈가 리프팅, 주름 케어</benefit>
+      </ingredient>
+      <ingredient>
+        <name>레티놀 복합체 (Retinol Complex)</name>
+        <benefit>눈가 주름 개선, 콜라겐 생성 촉진</benefit>
+      </ingredient>
+      <ingredient>
+        <name>카페인 (Caffeine)</name>
+        <benefit>눈가 부기 완화, 다크서클 개선</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">크림 사용 전 소량을 눈가에 부드럽게 도포합니다.</step>
+      <step order="2">안쪽에서 바깥쪽으로 가볍게 톡톡 두드려 흡수시킵니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.7</average_score>
+      <max_score>5.0</max_score>
+      <review_count>2860</review_count>
+      <highlights>
+        <highlight>눈가 주름 개선 효과 우수</highlight>
+        <highlight>눈가 탄력 회복 체감</highlight>
+        <highlight>진설크림과 함께 사용 시 시너지</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>진설 라인과 세트로 사용 시 안티에이징 시너지 효과</reason>
+      <reason>눈가 전문 안티에이징 크림으로 깊은 주름 케어에 탁월</reason>
+      <reason>40대 이상 눈가 고민 집중 케어에 최적</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>설화수 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>백화점 설화수 카운터</channel>
+        <channel>면세점</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="3" id="AESTRA-PT-001">
+    <brand>에스트라 (AESTURA)</brand>
+    <name>리제덤365 모공탄력 캡슐세럼</name>
+    <name_en>Regederm 365 Pore Elasticity Capsule Serum</name_en>
+    <category>스킨케어</category>
+    <sub_category>세럼</sub_category>
+    <volume>50ml</volume>
+    <price currency="KRW">38000</price>
+
+    <skin_types>
+      <skin_type>중성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>민감성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>모공 탄력 개선</concern>
+      <concern>피부 장벽 강화</concern>
+      <concern>피부 윤기 부여</concern>
+      <concern>모공 축소</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>세콜지 (Secholji)</name>
+        <benefit>피부 장벽 강화, 캡슐 구성 성분</benefit>
+      </ingredient>
+      <ingredient>
+        <name>콜라겐 (Collagen)</name>
+        <benefit>모공 주위 탄력 향상, 피부 밀도 개선</benefit>
+      </ingredient>
+      <ingredient>
+        <name>비타민 B3 (Niacinamide)</name>
+        <benefit>건강한 윤기, 맑은 피부 톤</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">토너 후 적당량을 덜어 모공이 신경 쓰이는 부위 중심으로 바릅니다.</step>
+      <step order="2">얼굴 전체에 부드럽게 펴 발라줍니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.5</average_score>
+      <max_score>5.0</max_score>
+      <review_count>3470</review_count>
+      <highlights>
+        <highlight>사용 7일 만에 모공 탄력 2배 개선 (인체적용시험)</highlight>
+        <highlight>모공 수 27%, 면적 22% 감소 확인</highlight>
+        <highlight>민감한 피부에도 자극 없이 사용 가능</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>메디뷰티 브랜드로 임상 시험 데이터 기반의 효과 입증</reason>
+      <reason>모공 탄력과 피부 장벽을 동시에 관리하는 이중 효능</reason>
+      <reason>민감 피부도 안심하고 사용할 수 있는 저자극 세럼</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>에스트라 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>아모레몰</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <!-- ============================================================ -->
+  <!-- Inquiry Set 3: 메이크업 베이스 & 립 추천 (20~30대 타겟)        -->
+  <!-- 출처: 동아일보 '2023년 아모레퍼시픽 베스트 상품 7' 기반 합성    -->
+  <!-- ============================================================ -->
+  <inquiry_context id="makeup">
+    <description>메이크업 베이스, 립 제품 추천 — 자연스러운 광채와 지속력을 원하는 분을 위한 3종</description>
+    <target_skin_types>
+      <skin_type>모든 피부</skin_type>
+    </target_skin_types>
+  </inquiry_context>
+
+  <product rank="1" id="HERA-GLF-001">
+    <brand>헤라 (HERA)</brand>
+    <name>글로우 래스팅 파운데이션</name>
+    <name_en>Glow Lasting Foundation</name_en>
+    <category>메이크업</category>
+    <sub_category>파운데이션</sub_category>
+    <volume>30ml</volume>
+    <price currency="KRW">55000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>피부 톤 보정</concern>
+      <concern>커버력</concern>
+      <concern>지속력</concern>
+      <concern>수분 광채</concern>
+      <concern>피부결 표현</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>스킨케어 성분 78%</name>
+        <benefit>하루 종일 촉촉하고 편안한 피부 유지</benefit>
+      </ingredient>
+      <ingredient>
+        <name>식물 유래 플로럴 성분</name>
+        <benefit>피부 진정, 건강한 생기 부여</benefit>
+      </ingredient>
+      <ingredient>
+        <name>미세 입자 파우더</name>
+        <benefit>얇고 가볍게 밀착, 본래 좋은 피부처럼 자연스러운 표현</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <shade_options>
+      <shade code="13N1">포슬린 (Porcelain)</shade>
+      <shade code="17C1">로제 바닐라 (Rose Vanilla)</shade>
+      <shade code="21N1">바닐라 (Vanilla)</shade>
+      <shade code="23N1">베이지 (Beige)</shade>
+      <shade code="25N1">앰버 (Amber)</shade>
+      <shade code="27N1">허니 (Honey)</shade>
+    </shade_options>
+
+    <how_to_use>
+      <step order="1">스킨케어와 선크림 후 적당량을 손등에 덜어줍니다.</step>
+      <step order="2">파운데이션 브러시 또는 스펀지로 얼굴 안쪽에서 바깥으로 펴 발라줍니다.</step>
+      <step order="3">커버가 필요한 부위는 소량 추가 덧발라줍니다.</step>
+      <recommended_frequency>매일 메이크업 시</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.6</average_score>
+      <max_score>5.0</max_score>
+      <review_count>6540</review_count>
+      <highlights>
+        <highlight>수분 빛이 입체감을 살려줌</highlight>
+        <highlight>78% 스킨케어 성분으로 편안한 착용감</highlight>
+        <highlight>얇고 가볍게 밀착되는 자연스러운 커버</highlight>
+        <highlight>하루 종일 맑고 촉촉한 피부 유지</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>78% 스킨케어 성분으로 메이크업 하면서 피부 관리 동시 진행</reason>
+      <reason>수분 광채 파운데이션으로 건조한 피부에도 안성맞춤</reason>
+      <reason>얇고 자연스러운 커버력으로 데일리 메이크업에 최적</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>헤라 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>백화점 헤라 카운터</channel>
+        <channel>올리브영</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="2" id="HERA-SFGT-001">
+    <brand>헤라 (HERA)</brand>
+    <name>센슈얼 피팅 글로우 틴트</name>
+    <name_en>Sensual Fitting Glow Tint</name_en>
+    <category>메이크업</category>
+    <sub_category>립 틴트</sub_category>
+    <volume>4.5g</volume>
+    <price currency="KRW">37000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>립 광택</concern>
+      <concern>립 보습</concern>
+      <concern>선명한 립 컬러</concern>
+      <concern>Y2K 포인트 메이크업</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>글로우 커팅 기술 (Glow Cutting Technology)</name>
+        <benefit>광택감을 주는 성분을 세밀하게 쪼개어 유리알처럼 반짝이는 광 구현</benefit>
+      </ingredient>
+      <ingredient>
+        <name>아몬드오일 (Almond Oil)</name>
+        <benefit>립 보습, 촉촉한 밀착감</benefit>
+      </ingredient>
+      <ingredient>
+        <name>코코넛오일 (Coconut Oil)</name>
+        <benefit>립 보호막 형성, 부드러운 사용감</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <shade_options>
+      <shade code="338">뉴트럴 피치 (Neutral Peach)</shade>
+      <shade code="339">말린 로즈 (Dried Rose)</shade>
+      <shade code="340">코랄 브릭 (Coral Brick)</shade>
+      <shade code="341">레드 오렌지 (Red Orange)</shade>
+      <shade code="342">체리 블라썸 (Cherry Blossom)</shade>
+      <shade code="343">무드 와인 (Mood Wine)</shade>
+    </shade_options>
+
+    <how_to_use>
+      <step order="1">립밤이나 립 프라이머로 입술을 정돈합니다.</step>
+      <step order="2">입술 중앙부터 바깥쪽으로 한 겹 바릅니다.</step>
+      <step order="3">선명한 발색을 원하면 한 번 더 덧발라줍니다.</step>
+      <recommended_frequency>매일 메이크업 시</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.5</average_score>
+      <max_score>5.0</max_score>
+      <review_count>4280</review_count>
+      <highlights>
+        <highlight>덧바를수록 쌓이는 아름다운 광택감</highlight>
+        <highlight>끈적거림 없이 편안한 착용감</highlight>
+        <highlight>선명하면서 과감한 립 표현 가능</highlight>
+        <highlight>Y2K 트렌드 메이크업에 최적</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>글로우 커팅 기술로 유리알 광택의 차별화된 립 표현</reason>
+      <reason>여러 번 덧발라도 끈적임 없는 편안한 착용감</reason>
+      <reason>트렌디한 Y2K 콘셉트 포인트 메이크업에 안성맞춤</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>헤라 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>백화점 헤라 카운터</channel>
+        <channel>올리브영</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="3" id="LANEIGE-NC-001">
+    <brand>라네즈 (LANEIGE)</brand>
+    <name>네오 쿠션</name>
+    <name_en>Neo Cushion</name_en>
+    <category>메이크업</category>
+    <sub_category>쿠션 파운데이션</sub_category>
+    <volume>15g</volume>
+    <price currency="KRW">42000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>자연스러운 피부 표현</concern>
+      <concern>무너짐 방지</concern>
+      <concern>가벼운 착용감</concern>
+      <concern>휴대 편의성</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>스킨케어 성분 복합체</name>
+        <benefit>가볍게 발리면서 피부 케어 동시 진행</benefit>
+      </ingredient>
+      <ingredient>
+        <name>강한 밀착 파우더 (Strong Fit Powder)</name>
+        <benefit>무너짐 없는 완벽한 밀착, 찍힘 없는 사용감</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <shade_options>
+      <shade code="13N1">아이보리 (Ivory)</shade>
+      <shade code="21N1">베이지 (Beige)</shade>
+      <shade code="23N1">샌드 (Sand)</shade>
+    </shade_options>
+
+    <how_to_use>
+      <step order="1">스킨케어 후 퍼프에 내용물을 적당량 묻혀 톡톡 두드려 바릅니다.</step>
+      <step order="2">커버가 필요한 부위에 소량을 추가합니다.</step>
+      <recommended_frequency>매일 메이크업 시</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.4</average_score>
+      <max_score>5.0</max_score>
+      <review_count>15200</review_count>
+      <highlights>
+        <highlight>2020년 출시 이후 국내외 누적 판매 대히트</highlight>
+        <highlight>슬림한 팩트 디자인으로 휴대성 우수</highlight>
+        <highlight>강한 밀착력으로 무너짐 없는 지속력</highlight>
+        <highlight>피부가 자연스럽게 빛나는 가벼운 마무리</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>슬림 디자인과 퍼프 분실 방지 기능으로 휴대 편의성 극대화</reason>
+      <reason>가벼운 텍스처지만 강한 밀착력으로 하루 종일 무너짐 없음</reason>
+      <reason>자연광 아래 빛나는 광채 마무리로 데일리 쿠션 최적</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>라네즈 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>세포라 (글로벌)</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <!-- ============================================================ -->
+  <!-- Inquiry Set 4: 수분 보습 집중 케어 추천 (건성·민감성 타겟)      -->
+  <!-- 출처: 아모레퍼시픽 공식 제품 정보 기반 합성 데이터              -->
+  <!-- ============================================================ -->
+  <inquiry_context id="hydration">
+    <description>수분 부족, 건조함, 민감성 피부를 위한 집중 보습 추천 제품 3종</description>
+    <target_skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>민감성</skin_type>
+      <skin_type>중성</skin_type>
+    </target_skin_types>
+  </inquiry_context>
+
+  <product rank="1" id="SULWHASOO-FCAS-002">
+    <brand>설화수 (Sulwhasoo)</brand>
+    <name>윤조에센스</name>
+    <name_en>First Care Activating Serum</name_en>
+    <category>스킨케어</category>
+    <sub_category>에센스/세럼</sub_category>
+    <volume>90ml</volume>
+    <price currency="KRW">93000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>피부 장벽 강화</concern>
+      <concern>보습</concern>
+      <concern>피부 밸런스 회복</concern>
+      <concern>피부 윤기</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>자음단™ (JAUM Balancing Complex™)</name>
+        <benefit>한방 처방 기반의 피부 밸런스 회복, 피부 장벽 강화 및 윤기 부여</benefit>
+      </ingredient>
+      <ingredient>
+        <name>작약 추출물 (Peony Root Extract)</name>
+        <benefit>피부 진정, 항염, 혈색 개선</benefit>
+      </ingredient>
+      <ingredient>
+        <name>연꽃 추출물 (Lotus Extract)</name>
+        <benefit>항산화, 피부 정화, 보습</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 직후 스킨케어 첫 단계에서 사용합니다 (토너 전).</step>
+      <step order="2">적당량을 손바닥에 덜어 얼굴 전체를 감싸듯 흡수시킵니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.7</average_score>
+      <max_score>5.0</max_score>
+      <review_count>3254</review_count>
+      <highlights>
+        <highlight>세안 후 첫 단계로 피부 컨디션 즉각 개선</highlight>
+        <highlight>후속 제품 흡수를 도와주는 부스터 역할</highlight>
+        <highlight>한방 향이 고급스럽고 편안함</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>세안 직후 피부 밸런스를 잡아 후속 제품의 흡수율을 높여주는 퍼스트 케어</reason>
+      <reason>한방 성분 기반으로 피부 장벽을 근본적으로 강화</reason>
+      <reason>모든 피부 타입에 사용 가능한 범용 에센스</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>설화수 공식몰</channel>
+        <channel>아모레몰</channel>
+        <channel>백화점 설화수 카운터</channel>
+        <channel>면세점</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="2" id="INNISFREE-GTS-002">
+    <brand>이니스프리 (Innisfree)</brand>
+    <name>그린티 씨드 세럼</name>
+    <name_en>Green Tea Seed Serum</name_en>
+    <category>스킨케어</category>
+    <sub_category>세럼</sub_category>
+    <volume>80ml</volume>
+    <price currency="KRW">29000</price>
+
+    <skin_types>
+      <skin_type>중성</skin_type>
+      <skin_type>건성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>민감성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>수분 공급</concern>
+      <concern>피부 장벽 강화</concern>
+      <concern>피부 건조</concern>
+      <concern>환경 스트레스 보호</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>제주 녹차 추출물 16%</name>
+        <benefit>항산화, 수분 공급, 피부 진정</benefit>
+      </ingredient>
+      <ingredient>
+        <name>녹차씨 오일 (Green Tea Seed Oil)</name>
+        <benefit>피부 장벽 강화, 영양 공급</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid)</name>
+        <benefit>수분 보유, 피부 탄력 향상</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">토너 후 적당량을 얼굴에 부드럽게 펴 발라줍니다.</step>
+      <step order="2">로션 또는 크림으로 마무리합니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.5</average_score>
+      <max_score>5.0</max_score>
+      <review_count>12450</review_count>
+      <highlights>
+        <highlight>가벼운 텍스처로 흡수가 빠름</highlight>
+        <highlight>제주 녹차 성분으로 안심 사용</highlight>
+        <highlight>리필 가능해서 친환경적</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>제주 녹차 16%의 풍부한 수분과 항산화 효과를 합리적 가격으로 제공</reason>
+      <reason>가벼운 텍스처로 여름에도 끈적임 없이 사용 가능</reason>
+      <reason>리필 시스템으로 지속 가능한 소비를 실천하는 친환경 제품</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>이니스프리 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>아모레몰</channel>
+        <channel>쿠팡</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
+  <product rank="3" id="HANYUL-YP-001">
+    <brand>한율 (Hanyul)</brand>
+    <name>달빛유자 수면팩</name>
+    <name_en>Moonlight Yuja Sleeping Mask</name_en>
+    <category>마스크/팩</category>
+    <sub_category>수면 마스크</sub_category>
+    <volume>70ml</volume>
+    <price currency="KRW">28000</price>
+
+    <skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>중성</skin_type>
+      <skin_type>민감성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>수분 공급</concern>
+      <concern>피부 톤 개선</concern>
+      <concern>피부 투명도 향상</concern>
+      <concern>피부 진정</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>달빛유자 추출물 (Moonlight Yuja Extract)</name>
+        <benefit>비타민C 풍부, 피부 톤 브라이트닝, 항산화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>꿀 추출물 (Honey Extract)</name>
+        <benefit>깊은 보습, 영양 공급, 피부 진정</benefit>
+      </ingredient>
+      <ingredient>
+        <name>한방 성분 복합체</name>
+        <benefit>피부 건강 유지, 자연 유래 보습</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <how_to_use>
+      <step order="1">저녁 스킨케어 마지막 단계에 얼굴 전체에 고르게 바릅니다.</step>
+      <step order="2">그대로 취침하고 다음 날 아침 세안합니다.</step>
+      <recommended_frequency>매일 또는 주 3~4회</recommended_frequency>
+    </how_to_use>
+
+    <ratings>
+      <average_score>4.4</average_score>
+      <max_score>5.0</max_score>
+      <review_count>2180</review_count>
+      <highlights>
+        <highlight>유자향이 상쾌하고 기분 좋은 수면 유도</highlight>
+        <highlight>아침 피부 톤이 밝아지는 효과 체감</highlight>
+        <highlight>건조한 피부에 촉촉한 보습감</highlight>
+      </highlights>
+    </ratings>
+
+    <recommendation_reasons>
+      <reason>유자 추출물의 비타민C로 보습과 브라이트닝을 동시에 관리</reason>
+      <reason>한율 특유의 한방+자연 유래 성분으로 민감성 피부에도 안심 사용</reason>
+      <reason>합리적 가격으로 매일 사용 가능한 수면 보습팩</reason>
+    </recommendation_reasons>
+
+    <purchase_info>
+      <channels>
+        <channel>한율 공식몰</channel>
+        <channel>올리브영</channel>
+        <channel>아모레몰</channel>
+        <channel>쿠팡</channel>
+      </channels>
+    </purchase_info>
+  </product>
+
 </recommendations>

@@ -18,13 +18,10 @@ dependencies = [
 
   # Azure AI Services
   "azure-ai-projects==2.0.0b2",
-  "azure-ai-evaluation==1.8.0",
+  "azure-ai-evaluation==1.16.1",
   "azure-ai-inference==1.0.0b8",
   "azure-search-documents==11.5.2",
   "azure-ai-agentserver-agentframework==1.0.0b7",
-
-  # Semantic Kernel
-  "semantic-kernel[azure]>=1.28.0",
 
   # OpenAI
   "openai==2.13.0",

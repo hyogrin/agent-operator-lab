@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   product_contexts.xml
-  마몽드 플래시토닝 데이지 리퀴드 마스크의 상세 제품 스펙.
+  아모레퍼시픽 주요 브랜드별 대표 제품 상세 스펙.
   intent=product_search 시 LLM context로 제공됩니다.
-  출처: amore.com / 마몽드 공식 제품 정보 기반 합성 데이터
+  출처: amore.com / 아모레퍼시픽 공식 제품 정보 기반 합성 데이터
+  브랜드: 마몽드, 설화수, 라네즈, 이니스프리, 헤라
 -->
 <products>
   <product id="MAMONDE-FTD-001">
@@ -131,4 +132,515 @@
       </item>
     </faq>
   </product>
+
+  <!-- ============================================================ -->
+  <!-- 설화수 윤조에센스 — 아모레퍼시픽 대표 한방 화장품 브랜드         -->
+  <!-- ============================================================ -->
+  <product id="SULWHASOO-FCAS-001">
+    <brand>설화수 (Sulwhasoo)</brand>
+    <name>윤조에센스</name>
+    <name_en>First Care Activating Serum</name_en>
+    <category>스킨케어</category>
+    <sub_category>에센스/세럼</sub_category>
+    <volume>90ml</volume>
+    <price currency="KRW">93000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>피부 장벽 강화</concern>
+      <concern>보습</concern>
+      <concern>피부 탄력 개선</concern>
+      <concern>피부 윤기 부여</concern>
+      <concern>안티에이징</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>자음단™ (JAUM Balancing Complex™)</name>
+        <concentration>-</concentration>
+        <benefit>한방 처방 기반 피부 밸런스 회복, 피부 장벽 강화, 윤기 부여</benefit>
+      </ingredient>
+      <ingredient>
+        <name>작약 추출물 (Peony Root Extract)</name>
+        <concentration>5%</concentration>
+        <benefit>피부 진정, 항염, 혈색 개선</benefit>
+      </ingredient>
+      <ingredient>
+        <name>연꽃 추출물 (Lotus Extract)</name>
+        <concentration>3%</concentration>
+        <benefit>항산화, 피부 정화, 보습</benefit>
+      </ingredient>
+      <ingredient>
+        <name>백합 추출물 (Lily Extract)</name>
+        <concentration>2%</concentration>
+        <benefit>미백, 피부 투명도 향상</benefit>
+      </ingredient>
+      <ingredient>
+        <name>솔로몬의 인장 추출물 (Solomon's Seal Extract)</name>
+        <concentration>2%</concentration>
+        <benefit>피부 탄력 강화, 주름 개선</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <full_ingredients>정제수, 부틸렌글라이콜, 디프로필렌글라이콜, 글리세린, 작약뿌리추출물, 연꽃추출물, 백합추출물, 솔로몬의인장추출물, 황기추출물, 스쿠알란, 나이아신아마이드, 판테놀, 알란토인, 트레할로오스, 히알루론산나트륨, 아데노신, 카보머, 잔탄검, 트로메타민, 에틸헥실글리세린, 페녹시에탄올, 향료</full_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 후 첫 단계에서 사용합니다 (토너 전).</step>
+      <step order="2">적당량(2~3방울)을 손바닥에 덜어 체온으로 따뜻하게 합니다.</step>
+      <step order="3">양손으로 얼굴 전체를 감싸듯 부드럽게 흡수시킵니다.</step>
+      <step order="4">이후 토너, 세럼, 크림 등의 스킨케어 순서를 따릅니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+      <best_time>세안 직후</best_time>
+    </how_to_use>
+
+    <texture>에센스(세럼), 부드럽고 촉촉한 액상</texture>
+    <scent>한방 허브 향 (은은한 꽃향)</scent>
+    <finish>윤기 있고 촉촉한 마무리</finish>
+
+    <certifications>
+      <certification>피부과 테스트 완료</certification>
+      <certification>알레르기 테스트 완료</certification>
+    </certifications>
+
+    <cautions>
+      <caution>피부 이상 발생 시 사용을 중단하고 전문의와 상담하세요.</caution>
+      <caution>눈에 들어가지 않도록 주의하세요.</caution>
+      <caution>어린이 손이 닿지 않는 곳에 보관하세요.</caution>
+    </cautions>
+
+    <storage>
+      <condition>직사광선 및 고온 다습한 곳을 피해 보관</condition>
+      <shelf_life_unopened>36개월</shelf_life_unopened>
+      <shelf_life_opened>개봉 후 12개월 이내 사용</shelf_life_opened>
+    </storage>
+
+    <ratings>
+      <average_score>4.7</average_score>
+      <max_score>5.0</max_score>
+      <review_count>3254</review_count>
+      <highlights>
+        <highlight>세안 후 첫 단계로 피부 컨디션 즉각 개선</highlight>
+        <highlight>한방 향이 고급스럽고 편안함</highlight>
+        <highlight>흡수력이 빠르고 끈적임 없음</highlight>
+        <highlight>장기 사용 시 피부 톤 개선 체감</highlight>
+      </highlights>
+    </ratings>
+
+    <purchase_info>
+      <channels>
+        <channel>아모레몰 (amoremall.com)</channel>
+        <channel>설화수 공식 홈페이지</channel>
+        <channel>백화점 설화수 카운터</channel>
+        <channel>면세점</channel>
+        <channel>네이버쇼핑</channel>
+      </channels>
+      <availability>국내 전 유통채널 및 글로벌 구매 가능</availability>
+    </purchase_info>
+
+    <faq>
+      <item>
+        <question>토너 전에 사용해야 하나요?</question>
+        <answer>네, 윤조에센스는 세안 직후 스킨케어의 가장 첫 단계에서 사용하는 퍼스트 케어 에센스입니다. 토너 전에 사용해야 후속 제품의 흡수를 도와줍니다.</answer>
+      </item>
+      <item>
+        <question>20대도 사용해도 되나요?</question>
+        <answer>네, 모든 연령대에 사용 가능합니다. 피부 밸런스를 잡아주는 제품이므로 20대부터 예방 차원에서 사용하시면 좋습니다.</answer>
+      </item>
+      <item>
+        <question>남성도 사용 가능한가요?</question>
+        <answer>네, 남녀 구분 없이 사용 가능한 에센스입니다.</answer>
+      </item>
+    </faq>
+  </product>
+
+  <!-- ============================================================ -->
+  <!-- 라네즈 워터 슬리핑 마스크 — 수분 공급 특화 브랜드               -->
+  <!-- ============================================================ -->
+  <product id="LANEIGE-WSM-001">
+    <brand>라네즈 (Laneige)</brand>
+    <name>워터 슬리핑 마스크</name>
+    <name_en>Water Sleeping Mask</name_en>
+    <category>마스크/팩</category>
+    <sub_category>슬리핑 마스크</sub_category>
+    <volume>70ml</volume>
+    <price currency="KRW">32000</price>
+
+    <skin_types>
+      <skin_type>건성</skin_type>
+      <skin_type>중성</skin_type>
+      <skin_type>복합성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>수분 부족</concern>
+      <concern>건조함</concern>
+      <concern>피부 탄력 저하</concern>
+      <concern>칙칙한 피부톤</concern>
+      <concern>수면 중 보습</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>슬리피딘™ (SLEEP-TOX™)</name>
+        <concentration>-</concentration>
+        <benefit>수면 중 피부 정화 및 수분 공급, 피부 스트레스 완화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid)</name>
+        <concentration>5%</concentration>
+        <benefit>강력한 수분 공급 및 수분 유지, 피부 장벽 보호</benefit>
+      </ingredient>
+      <ingredient>
+        <name>스쿠알란 (Squalane)</name>
+        <concentration>3%</concentration>
+        <benefit>피부 보호막 형성, 보습 유지, 피부 장벽 강화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>프로바이오틱스 복합체 (Probiotic Complex)</name>
+        <concentration>2%</concentration>
+        <benefit>피부 마이크로바이옴 균형 회복, 피부 면역력 강화</benefit>
+      </ingredient>
+      <ingredient>
+        <name>라벤더 오일 (Lavender Oil)</name>
+        <concentration>0.5%</concentration>
+        <benefit>진정, 릴랙스 아로마 효과</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <full_ingredients>정제수, 부틸렌글라이콜, 사이클로펜타실록산, 글리세린, 히알루론산나트륨, 스쿠알란, 프로바이오틱스추출물, 라벤더오일, 판테놀, 트레할로오스, 베타글루칸, 알란토인, 디메치콘, 카보머, 트로메타민, 에틸헥실글리세린, 페녹시에탄올, 향료</full_ingredients>
+
+    <how_to_use>
+      <step order="1">저녁 스킨케어 마지막 단계에서 사용합니다.</step>
+      <step order="2">적당량을 손끝에 덜어 얼굴 전체에 고르게 펴 발라줍니다.</step>
+      <step order="3">별도의 세안 없이 그대로 취침합니다.</step>
+      <step order="4">다음 날 아침 미온수로 세안합니다.</step>
+      <recommended_frequency>매일 저녁 또는 주 3~4회</recommended_frequency>
+      <best_time>취침 전</best_time>
+    </how_to_use>
+
+    <texture>젤 크림 타입, 시원하고 가벼운 질감</texture>
+    <scent>라벤더 슬리핑 아로마</scent>
+    <finish>촉촉하고 매끈한 마무리</finish>
+
+    <certifications>
+      <certification>피부과 테스트 완료</certification>
+      <certification>알레르기 테스트 완료</certification>
+      <certification>비건 인증</certification>
+    </certifications>
+
+    <cautions>
+      <caution>피부 이상 발생 시 사용을 중단하고 전문의와 상담하세요.</caution>
+      <caution>눈 주변을 피해 사용하세요.</caution>
+      <caution>어린이 손이 닿지 않는 곳에 보관하세요.</caution>
+    </cautions>
+
+    <storage>
+      <condition>직사광선 및 고온 다습한 곳을 피해 보관</condition>
+      <shelf_life_unopened>36개월</shelf_life_unopened>
+      <shelf_life_opened>개봉 후 12개월 이내 사용</shelf_life_opened>
+    </storage>
+
+    <ratings>
+      <average_score>4.6</average_score>
+      <max_score>5.0</max_score>
+      <review_count>8721</review_count>
+      <highlights>
+        <highlight>자고 일어나면 피부가 촉촉하고 탱탱함</highlight>
+        <highlight>라벤더 향이 수면에 도움</highlight>
+        <highlight>바르고 자도 베개에 묻지 않음</highlight>
+        <highlight>건조한 겨울에 필수템</highlight>
+      </highlights>
+    </ratings>
+
+    <purchase_info>
+      <channels>
+        <channel>아모레몰 (amoremall.com)</channel>
+        <channel>라네즈 공식 홈페이지</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>세포라 (Sephora) 글로벌</channel>
+      </channels>
+      <availability>국내 및 글로벌 전 유통채널 구매 가능</availability>
+    </purchase_info>
+
+    <faq>
+      <item>
+        <question>매일 사용해도 되나요?</question>
+        <answer>네, 자극이 적은 제품이므로 매일 저녁 사용 가능합니다. 다만 피부 상태에 따라 주 3~4회로 조절해도 좋습니다.</answer>
+      </item>
+      <item>
+        <question>지성 피부에도 적합한가요?</question>
+        <answer>젤 크림 타입이라 지성 피부에도 가볍게 사용 가능하지만, 유분이 많은 피부라면 소량만 부위별로 사용하시길 권장합니다.</answer>
+      </item>
+      <item>
+        <question>다른 수면팩과 함께 사용해도 되나요?</question>
+        <answer>한 가지 슬리핑 마스크만 사용하시는 것을 권장합니다. 여러 제품을 겹쳐 사용하면 모공이 막힐 수 있습니다.</answer>
+      </item>
+    </faq>
+  </product>
+
+  <!-- ============================================================ -->
+  <!-- 이니스프리 그린티 씨드 세럼 — 천연 성분 강조 브랜드             -->
+  <!-- ============================================================ -->
+  <product id="INNISFREE-GTS-001">
+    <brand>이니스프리 (Innisfree)</brand>
+    <name>그린티 씨드 세럼</name>
+    <name_en>Green Tea Seed Serum</name_en>
+    <category>스킨케어</category>
+    <sub_category>세럼</sub_category>
+    <volume>80ml</volume>
+    <price currency="KRW">29000</price>
+
+    <skin_types>
+      <skin_type>중성</skin_type>
+      <skin_type>건성</skin_type>
+      <skin_type>복합성</skin_type>
+      <skin_type>민감성</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>수분 공급</concern>
+      <concern>피부 장벽 강화</concern>
+      <concern>피부 건조</concern>
+      <concern>환경 스트레스로부터 피부 보호</concern>
+      <concern>피부 탄력 유지</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>제주 녹차 추출물 (Jeju Green Tea Extract)</name>
+        <concentration>16%</concentration>
+        <benefit>항산화, 피부 수분 공급, 피지 조절, 피부 진정</benefit>
+      </ingredient>
+      <ingredient>
+        <name>녹차씨 오일 (Green Tea Seed Oil)</name>
+        <concentration>5%</concentration>
+        <benefit>피부 장벽 강화, 보습, 영양 공급</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid)</name>
+        <concentration>3%</concentration>
+        <benefit>수분 보유, 피부 탄력 향상</benefit>
+      </ingredient>
+      <ingredient>
+        <name>스쿠알란 (Squalane)</name>
+        <concentration>2%</concentration>
+        <benefit>수분 잠금, 피부 보호막 형성</benefit>
+      </ingredient>
+      <ingredient>
+        <name>판테놀 (Panthenol)</name>
+        <concentration>1%</concentration>
+        <benefit>피부 진정, 재생 촉진</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <full_ingredients>정제수, 제주녹차추출물, 부틸렌글라이콜, 글리세린, 녹차씨오일, 히알루론산나트륨, 스쿠알란, 판테놀, 베타글루칸, 트레할로오스, 알란토인, 카보머, 잔탄검, 트로메타민, 에틸헥실글리세린, 페녹시에탄올</full_ingredients>
+
+    <how_to_use>
+      <step order="1">세안 후 토너로 피부를 정돈합니다.</step>
+      <step order="2">적당량(2~3방울)을 손바닥에 덜어 체온으로 따뜻하게 합니다.</step>
+      <step order="3">얼굴 안쪽에서 바깥쪽으로 부드럽게 펴 발라줍니다.</step>
+      <step order="4">이후 로션 또는 크림으로 마무리합니다.</step>
+      <recommended_frequency>매일 아침, 저녁</recommended_frequency>
+      <best_time>토너 후</best_time>
+    </how_to_use>
+
+    <texture>에센스(세럼), 수분감 높은 가벼운 액상</texture>
+    <scent>은은한 녹차향</scent>
+    <finish>산뜻하고 촉촉한 마무리</finish>
+
+    <certifications>
+      <certification>EWG 그린 등급 성분</certification>
+      <certification>피부과 테스트 완료</certification>
+      <certification>비건 인증</certification>
+      <certification>리필 용기 제공 (친환경 패키지)</certification>
+    </certifications>
+
+    <cautions>
+      <caution>피부 이상 발생 시 사용을 중단하고 전문의와 상담하세요.</caution>
+      <caution>눈에 들어가지 않도록 주의하세요.</caution>
+      <caution>어린이 손이 닿지 않는 곳에 보관하세요.</caution>
+    </cautions>
+
+    <storage>
+      <condition>직사광선 및 고온 다습한 곳을 피해 보관</condition>
+      <shelf_life_unopened>30개월</shelf_life_unopened>
+      <shelf_life_opened>개봉 후 12개월 이내 사용</shelf_life_opened>
+    </storage>
+
+    <ratings>
+      <average_score>4.5</average_score>
+      <max_score>5.0</max_score>
+      <review_count>12450</review_count>
+      <highlights>
+        <highlight>가벼운 텍스처로 흡수가 빠름</highlight>
+        <highlight>건조한 피부에 즉각적인 수분 공급</highlight>
+        <highlight>자연 유래 성분으로 안심 사용</highlight>
+        <highlight>리필 가능해서 친환경적</highlight>
+      </highlights>
+    </ratings>
+
+    <purchase_info>
+      <channels>
+        <channel>아모레몰 (amoremall.com)</channel>
+        <channel>이니스프리 공식 홈페이지</channel>
+        <channel>올리브영</channel>
+        <channel>쿠팡</channel>
+        <channel>이니스프리 매장</channel>
+      </channels>
+      <availability>국내 전 유통채널 및 글로벌 구매 가능</availability>
+    </purchase_info>
+
+    <faq>
+      <item>
+        <question>여름에도 사용하기 좋은가요?</question>
+        <answer>네, 가볍고 산뜻한 텍스처라 여름에도 끈적임 없이 사용하기 좋습니다.</answer>
+      </item>
+      <item>
+        <question>민감성 피부에도 사용 가능한가요?</question>
+        <answer>제주 녹차 추출물이 진정 효과가 뛰어나 민감성 피부에도 순하게 사용할 수 있습니다. 다만 처음 사용 시 패치 테스트를 권장합니다.</answer>
+      </item>
+      <item>
+        <question>리필 용기는 어디서 구매하나요?</question>
+        <answer>이니스프리 공식 매장 및 온라인에서 리필 전용 용기를 별도 구매할 수 있습니다.</answer>
+      </item>
+    </faq>
+  </product>
+
+  <!-- ============================================================ -->
+  <!-- 헤라 블랙 쿠션 — 세계 최초 쿠션 팩트 혁신 브랜드               -->
+  <!-- ============================================================ -->
+  <product id="HERA-BC-001">
+    <brand>헤라 (HERA)</brand>
+    <name>블랙 쿠션</name>
+    <name_en>Black Cushion</name_en>
+    <category>메이크업</category>
+    <sub_category>쿠션 파운데이션</sub_category>
+    <volume>15g (본품 + 리필 15g)</volume>
+    <price currency="KRW">55000</price>
+
+    <skin_types>
+      <skin_type>모든 피부</skin_type>
+    </skin_types>
+
+    <skin_concerns>
+      <concern>피부 톤 보정</concern>
+      <concern>커버력</concern>
+      <concern>지속력</concern>
+      <concern>자외선 차단</concern>
+      <concern>피부 광채</concern>
+    </skin_concerns>
+
+    <key_ingredients>
+      <ingredient>
+        <name>미세 커버 파우더 (Micro Cover Powder)</name>
+        <concentration>-</concentration>
+        <benefit>얇고 균일한 커버링, 모공 및 잡티 자연스러운 보정</benefit>
+      </ingredient>
+      <ingredient>
+        <name>세럼 에센스 베이스 (Serum Essence Base)</name>
+        <concentration>-</concentration>
+        <benefit>메이크업 중 스킨케어 효과, 24시간 수분 유지</benefit>
+      </ingredient>
+      <ingredient>
+        <name>나이아신아마이드 (Niacinamide)</name>
+        <concentration>2%</concentration>
+        <benefit>피부 톤 개선, 미백 효과</benefit>
+      </ingredient>
+      <ingredient>
+        <name>히알루론산 (Hyaluronic Acid)</name>
+        <concentration>1%</concentration>
+        <benefit>수분 공급, 피부 탄력 유지</benefit>
+      </ingredient>
+      <ingredient>
+        <name>티타늄디옥사이드 (Titanium Dioxide)</name>
+        <concentration>-</concentration>
+        <benefit>SPF34 PA++ 자외선 차단</benefit>
+      </ingredient>
+    </key_ingredients>
+
+    <full_ingredients>정제수, 사이클로펜타실록산, 티타늄디옥사이드, 징크옥사이드, 부틸렌글라이콜, 나이아신아마이드, 히알루론산나트륨, 디메치콘, 폴리글리세릴-3디이소스테아레이트, 아크릴레이트/디메치콘코폴리머, 실리카, 트리에톡시카프릴릴실레인, 마그네슘설페이트, 스테아릭애씨드, 알루미나, 에틸헥실글리세린, 페녹시에탄올, 향료</full_ingredients>
+
+    <shade_options>
+      <shade code="13C1">아이보리 (Ivory)</shade>
+      <shade code="17C1">로제 바닐라 (Rose Vanilla)</shade>
+      <shade code="21N1">바닐라 (Vanilla)</shade>
+      <shade code="23N1">베이지 (Beige)</shade>
+      <shade code="25N1">앰버 (Amber)</shade>
+    </shade_options>
+
+    <how_to_use>
+      <step order="1">스킨케어 후 자외선 차단을 위한 베이스 단계에서 사용합니다.</step>
+      <step order="2">퍼프에 적당량을 묻혀 얼굴 안쪽에서 바깥으로 톡톡 두드리며 펴 발라줍니다.</step>
+      <step order="3">커버가 필요한 부분은 소량을 추가 덧발라줍니다.</step>
+      <step order="4">파우더로 마무리하면 지속력이 향상됩니다.</step>
+      <recommended_frequency>매일 메이크업 시</recommended_frequency>
+      <best_time>스킨케어 및 선크림 후</best_time>
+    </how_to_use>
+
+    <texture>쿠션 타입, 촉촉한 세럼 질감</texture>
+    <scent>은은한 플로럴</scent>
+    <finish>세미 매트, 자연스러운 광채</finish>
+    <spf>SPF34 PA++</spf>
+
+    <certifications>
+      <certification>피부과 테스트 완료</certification>
+      <certification>알레르기 테스트 완료</certification>
+    </certifications>
+
+    <cautions>
+      <caution>피부 이상 발생 시 사용을 중단하고 전문의와 상담하세요.</caution>
+      <caution>눈에 들어가지 않도록 주의하세요.</caution>
+      <caution>사용 후 뚜껑을 꼭 닫아 내용물이 건조해지지 않도록 합니다.</caution>
+      <caution>어린이 손이 닿지 않는 곳에 보관하세요.</caution>
+    </cautions>
+
+    <storage>
+      <condition>직사광선 및 고온 다습한 곳을 피해 보관</condition>
+      <shelf_life_unopened>24개월</shelf_life_unopened>
+      <shelf_life_opened>개봉 후 6개월 이내 사용</shelf_life_opened>
+    </storage>
+
+    <ratings>
+      <average_score>4.6</average_score>
+      <max_score>5.0</max_score>
+      <review_count>5832</review_count>
+      <highlights>
+        <highlight>얇게 발리면서 커버력 우수</highlight>
+        <highlight>오래 지속되는 밀착력</highlight>
+        <highlight>세미 매트 광채 마무리가 자연스러움</highlight>
+        <highlight>리필 포함이라 가성비 좋음</highlight>
+      </highlights>
+    </ratings>
+
+    <purchase_info>
+      <channels>
+        <channel>아모레몰 (amoremall.com)</channel>
+        <channel>헤라 공식 홈페이지</channel>
+        <channel>백화점 헤라 카운터</channel>
+        <channel>올리브영</channel>
+        <channel>면세점</channel>
+      </channels>
+      <availability>국내 전 유통채널 및 글로벌 면세점 구매 가능</availability>
+    </purchase_info>
+
+    <faq>
+      <item>
+        <question>어떤 호수가 저에게 맞나요?</question>
+        <answer>21N1 바닐라가 한국인 평균 피부톤에 가장 잘 맞습니다. 밝은 피부는 13C1 아이보리, 살짝 어두운 피부는 23N1 베이지를 추천합니다. 매장에서 직접 테스트해 보시는 것을 권장합니다.</answer>
+      </item>
+      <item>
+        <question>건성 피부에도 괜찮나요?</question>
+        <answer>세럼 에센스 베이스가 수분을 공급하므로 건성 피부에도 적합합니다. 다만 극건성이라면 보습 크림을 충분히 바른 후 사용하시길 권장합니다.</answer>
+      </item>
+      <item>
+        <question>리필은 어디서 구매하나요?</question>
+        <answer>본품 구매 시 리필 1개가 포함되어 있습니다. 추가 리필은 공식 매장 및 온라인에서 별도 구매 가능합니다.</answer>
+      </item>
+    </faq>
+  </product>
+
 </products>

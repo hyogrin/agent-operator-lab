@@ -1,0 +1,20 @@
+/afh/code/agent-operator-lab/4_observability/sk_backend/.venv/lib/python3.12/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.3) or chardet (7.2.0)/charset_normalizer (3.4.6) doesn't match a supported version!
+  warnings.warn(
+INFO:     Started server process [710756]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/afh/code/agent-operator-lab/4_observability/sk_backend/.venv/lib/python3.12/site-packages/starlette/routing.py", line 638, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/afh/code/agent-operator-lab/4_observability/sk_backend/sk_orchestrator/main.py", line 69, in lifespan
+    _orchestrator = SKOrchestrator(_settings, tracer=tracer)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/afh/code/agent-operator-lab/4_observability/sk_backend/sk_orchestrator/orchestrator.py", line 136, in __init__
+    use_credential = not api_key(
+                         ^^^^^^^^
+TypeError: 'str' object is not callable
+
+ERROR:    Application startup failed. Exiting.
