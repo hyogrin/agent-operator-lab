@@ -59,6 +59,14 @@ class Settings(BaseSettings):
         ),
         description="Path to recommendation_contexts.xml",
     )
+    aoai_auth_method: str = Field(
+        default="key",
+        description=(
+            "Azure OpenAI auth method: "
+            "'key' (API key) or 'credential' "
+            "(DefaultAzureCredential)"
+        ),
+    )
     service_name: str = Field(
         default="sk-orchestrator-backend",
         description="OpenTelemetry service name",

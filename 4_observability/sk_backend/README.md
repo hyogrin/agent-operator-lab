@@ -128,8 +128,18 @@ AZURE_OPENAI_ENDPOINT=https://<resource>.openai.azure.com/
 AZURE_OPENAI_API_KEY=<key>
 AZURE_OPENAI_CHAT_DEPLOYMENT_NAME=gpt-4.1
 AZURE_OPENAI_API_VERSION=2025-03-01-preview
+AOAI_AUTH_METHOD=key
 APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=...
 ```
+
+`AOAI_AUTH_METHOD` controls how the backend authenticates with Azure OpenAI:
+
+| Value | Authentication | When to Use |
+|-------|---------------|-------------|
+| `key` (default) | API key (`AZURE_OPENAI_API_KEY`) | Local development, quick setup |
+| `credential` | `DefaultAzureCredential` (Entra ID) | Production, managed identity, RBAC-based access |
+
+When set to `credential`, the `AZURE_OPENAI_API_KEY` is not required. The backend uses `DefaultAzureCredential` which automatically picks up managed identity, Azure CLI login, or environment-based credentials.
 
 ### 3. Run the server
 
@@ -142,6 +152,9 @@ uvicorn sk_orchestrator.main:app --host 0.0.0.0 --port 8000
 
 # Option C: via python
 python -m sk_orchestrator.main
+
+# Kill the server (if running in foreground)
+kill $(lsof -ti :8000) 2>/dev/null; sleep 1
 ```
 
 The API docs are available at `http://localhost:8000/docs` (Swagger UI).

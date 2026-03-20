@@ -35,7 +35,7 @@ class SKOrchestrator:
 
         settings = Settings()          # reads .env
         orch = SKOrchestrator(settings)
-        result = await orch.run("마몽드 리퀴드 마스크 추천해줘")
+        result = await orch.run("화장품 추천해줘")
 
     Parameters:
     settings (Settings): Application configuration.
@@ -76,14 +76,34 @@ class SKOrchestrator:
                 endpoint = endpoint[: -len(suffix)]
                 break
 
-        chat_svc = AzureChatCompletion(
-            deployment_name=(
-                settings.azure_openai_chat_deployment_name
-            ),
-            endpoint=endpoint,
-            api_key=settings.azure_openai_api_key,
-            api_version=settings.azure_openai_api_version,
-        )
+        if settings.aoai_auth_method == "credential":
+            from azure.identity import (
+                DefaultAzureCredential,
+            )
+
+            chat_svc = AzureChatCompletion(
+                deployment_name=(
+                    settings
+                    .azure_openai_chat_deployment_name
+                ),
+                endpoint=endpoint,
+                credential=DefaultAzureCredential(),
+                api_version=(
+                    settings.azure_openai_api_version
+                ),
+            )
+        else:
+            chat_svc = AzureChatCompletion(
+                deployment_name=(
+                    settings
+                    .azure_openai_chat_deployment_name
+                ),
+                endpoint=endpoint,
+                api_key=settings.azure_openai_api_key,
+                api_version=(
+                    settings.azure_openai_api_version
+                ),
+            )
         self._kernel.add_service(chat_svc)
 
         # Register plugins
