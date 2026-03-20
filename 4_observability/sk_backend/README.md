@@ -408,3 +408,107 @@ llm_result_list.jsonl
 - **Groundedness (4a)**: Did the LLM answer stay *faithful* to the XML context without hallucinating?
 - **Coherence (4b)**: Is the response logically consistent and well-structured?
 - **Relevance (4c)**: Did the response directly address the user's query?
+
+## Segment Evaluation Pipeline CLI
+
+`segment-eval-pipeline.py` is a standalone CLI that parses Application Insights CSV exports and runs the full Foundry evaluation pipeline without requiring a notebook.
+
+### Three Modes
+
+| Mode | Description | Input | Output |
+|------|-------------|-------|--------|
+| `csv-import` | Parse App Insights CSV → evaluation JSONL | CSV file | `eval_dataset.jsonl` |
+| `evaluate` | Run Foundry eval pipeline (Parts 4-7) | JSONL dataset | Summary JSON + HTML dashboard |
+| `full` | Combined: csv-import → evaluate | CSV file | All outputs |
+
+### Usage
+
+```bash
+cd 4_observability
+
+# Mode 1: Parse CSV to evaluation dataset
+python segment-eval-pipeline.py csv-import \
+    --csv log/query_data_origin.csv \
+    --output log/eval_dataset.jsonl \
+    --start "2026-03-09T14:00" \
+    --end "2026-03-09T15:00"
+
+# Mode 2: Run evaluation on existing dataset
+python segment-eval-pipeline.py evaluate \
+    --data log/eval_dataset.jsonl \
+    --evaluators groundedness coherence relevance
+
+# Mode 3: Full pipeline (CSV → eval → dashboard)
+python segment-eval-pipeline.py full \
+    --csv log/query_data_origin.csv \
+    --evaluators intent_accuracy agent_relevance \
+        groundedness coherence relevance \
+    --start "2026-03-09T14:00" \
+    --end "2026-03-09T15:00"
+```
+
+### Available Evaluators
+
+| Name | Type | Metric | Description |
+|------|------|--------|-------------|
+| `intent_accuracy` | Custom (code) | 0.0 / 1.0 | Predicted vs expected intent exact match |
+| `agent_relevance` | Custom (code) | 0.0 / 1.0 | Predicted vs expected agent exact match |
+| `method_relevance` | Custom (code) | 0.0 / 1.0 | Predicted vs expected method exact match |
+| `groundedness` | Builtin | 1–5 | Response faithfulness to context |
+| `coherence` | Builtin | 1–5 | Response logical consistency |
+| `relevance` | Builtin | 1–5 | Response relevance to query |
+
+### CSV Trace Parsing
+
+The CLI parses Application Insights CSV exports (e.g., `query_data_origin.csv`) by grouping rows by `dd.trace_id` and extracting:
+
+| `custom_type` | Extracted As | Used For |
+|---------------|-------------|----------|
+| `USER_QUERY` | `query` | All evaluators |
+| `AGENT_NAME` | `agent`, `method`, `intent` | Custom evaluators |
+| `AGENT_OUTPUT_FORMATTED` | `context` | Groundedness, Relevance |
+| `FINAL_ANSWER_RAW` | `response` | All quality evaluators |
+
+### CLI Arguments
+
+```
+segment-eval-pipeline csv-import
+  --csv         Path to App Insights CSV export (required)
+  --output      Output JSONL path (default: log/eval_dataset.jsonl)
+  --start       Start time filter, ISO format (optional)
+  --end         End time filter, ISO format (optional)
+
+segment-eval-pipeline evaluate
+  --data        Path to evaluation JSONL (required)
+  --evaluators  Space-separated evaluator names (default: groundedness coherence relevance)
+  --dashboard   Output HTML dashboard path (optional)
+
+segment-eval-pipeline full
+  --csv         Path to App Insights CSV export (required)
+  --evaluators  Space-separated evaluator names (default: groundedness coherence relevance)
+  --start       Start time filter (optional)
+  --end         End time filter (optional)
+  --output      Intermediate JSONL path (optional)
+  --dashboard   Output HTML dashboard path (optional)
+```
+
+### Pipeline Flow
+
+```
+App Insights CSV (query_data_origin.csv)
+         │
+    csv-import (group by dd.trace_id)
+         │
+         ▼
+eval_dataset.jsonl (224 records)
+         │
+    evaluate
+         │
+         ├── Part 4: Register custom evaluators in Foundry
+         ├── Part 5: Create eval + run via Evals API
+         ├── Part 6: Poll results / local fallback
+         └── Part 7: Generate HTML dashboard
+         │
+         ▼
+eval_summary.json + eval_dashboard.html
+```
