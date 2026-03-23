@@ -1,0 +1,12 @@
+{
+  "FOUNDRY_NAME": "your-foundry-name",
+  "PROJECT_NAME": "default-project",
+  "RESOURCE_GROUP": "your-resource-group",
+  "LOCATION": "your-location",
+  "AZURE_SUBSCRIPTION_ID": "your-azure-subscription-id",
+  "TENANT_ID": "your-tenant-id",
+  "FOUNDRY_ID": "your-foundry-id",
+  "PROJECT_ID": "your-project-id",
+  "AZURE_AI_PROJECT_ENDPOINT": "your-azure-ai-project-endpoint"
+}
+
