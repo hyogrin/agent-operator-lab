@@ -1009,22 +1009,41 @@ def run_evaluate(
         f"📋 Evaluators: {valid}"
     )
 
-    # Initialize clients
-    credential = DefaultAzureCredential()
-    project_client = AIProjectClient(
-        endpoint=cfg["endpoint"],
-        credential=credential,
-    )
-    openai_client = project_client.get_openai_client()
-
-    eval_obj = None
-    eval_run = None
-    foundry_mode = False
-
     if local_only:
-        print("\n── Local-only mode ──")
+        print("\n── Local-only mode (API key) ──")
         print("   Skipping Parts 4-5 (Foundry).")
+        from openai import AzureOpenAI
+
+        api_key = os.environ.get("AZURE_OPENAI_API_KEY")
+        endpoint = os.environ.get(
+            "AZURE_OPENAI_ENDPOINT", ""
+        )
+        api_version = os.environ.get(
+            "AZURE_OPENAI_API_VERSION",
+            "2025-03-01-preview",
+        )
+        if not api_key or not endpoint:
+            print(
+                "❌ AZURE_OPENAI_API_KEY and "
+                "AZURE_OPENAI_ENDPOINT required "
+                "for --local mode."
+            )
+            sys.exit(1)
+
+        openai_client = AzureOpenAI(
+            api_key=api_key,
+            azure_endpoint=endpoint,
+            api_version=api_version,
+        )
     else:
+        # Initialize Foundry clients
+        credential = DefaultAzureCredential()
+        project_client = AIProjectClient(
+            endpoint=cfg["endpoint"],
+            credential=credential,
+        )
+        openai_client = project_client.get_openai_client()
+
         # Part 4: Register custom evaluators
         print("\n── Part 4: Register Evaluators ──")
         registered = _register_evaluators(
