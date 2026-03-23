@@ -39,6 +39,13 @@ This repo provides a comprehensive, hands-on workshop for **operating AI agents 
 
 - [4_observability/1_tracing_and_logging.ipynb](4_observability/1_tracing_and_logging.ipynb): Observability patterns with OpenTelemetry and Azure Application Insights—distributed tracing, structured logging, metrics collection, and Grafana dashboard visualization.
 
+- [4_observability/2_evaluation_pipeline.ipynb](4_observability/2_evaluation_pipeline.ipynb): Stage-by-stage evaluation pipeline using the Azure AI Foundry Evals API—register custom evaluators (intent/agent/method exact-match), run builtin evaluators (groundedness, coherence, relevance, similarity), and generate HTML dashboards with Foundry portal integration.
+
+- [4_observability/segment-eval-pipeline.py](4_observability/segment-eval-pipeline.py): Standalone CLI for evaluating Application Insights traces. Supports `csv-import` (parse App Insights CSV), `evaluate` (live/offline with Foundry or local mode), and `full` (combined). See [SK Backend README](4_observability/sk_backend/README.md) for details.
+
+![Evaluation Result MS Foundry](images/eval_result_foundry.png)
+![Evaluation Result Analysis](images/eval_analysis_result.png)
+
 ## Prerequisites
 
 - Python 3.12+
