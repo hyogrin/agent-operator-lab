@@ -962,6 +962,7 @@ def run_evaluate(
     data_path: str,
     evaluator_names: List[str],
     dashboard_path: Optional[str] = None,
+    local_only: bool = False,
 ) -> Dict[str, Any]:
     """Run the full evaluation pipeline (Parts 4-7).
 
@@ -969,6 +970,7 @@ def run_evaluate(
     data_path (str): Path to evaluation JSONL.
     evaluator_names (List[str]): Evaluators to run.
     dashboard_path (Optional[str]): Dashboard output.
+    local_only (bool): Skip Foundry, run locally.
 
     Returns:
     Dict[str, Any]: Evaluation summary payload.
@@ -1015,31 +1017,40 @@ def run_evaluate(
     )
     openai_client = project_client.get_openai_client()
 
-    # Part 4: Register custom evaluators
-    print("\n── Part 4: Register Evaluators ──")
-    registered = _register_evaluators(
-        project_client, valid, eval_uuid,
-    )
-    custom_count = len(registered)
-    builtin_count = sum(
-        1 for e in valid if e in BUILTIN_EVALUATORS
-    )
-    print(
-        f"   {custom_count} custom + "
-        f"{builtin_count} builtin"
-    )
+    eval_obj = None
+    eval_run = None
+    foundry_mode = False
 
-    # Build testing criteria
-    criteria = _build_testing_criteria(
-        valid, registered, model,
-    )
+    if local_only:
+        print("\n── Local-only mode ──")
+        print("   Skipping Parts 4-5 (Foundry).")
+    else:
+        # Part 4: Register custom evaluators
+        print("\n── Part 4: Register Evaluators ──")
+        registered = _register_evaluators(
+            project_client, valid, eval_uuid,
+        )
+        custom_count = len(registered)
+        builtin_count = sum(
+            1 for e in valid
+            if e in BUILTIN_EVALUATORS
+        )
+        print(
+            f"   {custom_count} custom + "
+            f"{builtin_count} builtin"
+        )
 
-    # Part 5: Run evaluation
-    print("\n── Part 5: Run Evaluation ──")
-    eval_obj, eval_run, foundry_mode = _run_eval(
-        openai_client, records, criteria,
-        eval_uuid, model,
-    )
+        # Build testing criteria
+        criteria = _build_testing_criteria(
+            valid, registered, model,
+        )
+
+        # Part 5: Run evaluation
+        print("\n── Part 5: Run Evaluation ──")
+        eval_obj, eval_run, foundry_mode = _run_eval(
+            openai_client, records, criteria,
+            eval_uuid, model,
+        )
 
     # Part 6: Collect results
     print("\n── Part 6: Collect Results ──")
@@ -1068,7 +1079,9 @@ def run_evaluate(
 
     # Build summary payload
     payload = {
-        "eval_id": eval_obj.id,
+        "eval_id": (
+            eval_obj.id if eval_obj else "local"
+        ),
         "run_id": (
             eval_run.id if eval_run else None
         ),
@@ -1178,6 +1191,10 @@ def _build_parser() -> argparse.ArgumentParser:
         "--dashboard", default=None,
         help="Output HTML dashboard path",
     )
+    p_eval.add_argument(
+        "--local", action="store_true",
+        help="Run locally only (skip Foundry)",
+    )
 
     # --- full ---
     p_full = sub.add_parser(
@@ -1214,6 +1231,10 @@ def _build_parser() -> argparse.ArgumentParser:
         "--dashboard", default=None,
         help="Output HTML dashboard path",
     )
+    p_full.add_argument(
+        "--local", action="store_true",
+        help="Run locally only (skip Foundry)",
+    )
 
     return parser
 
@@ -1236,7 +1257,7 @@ def main() -> None:
     elif args.command == "evaluate":
         run_evaluate(
             args.data, args.evaluators,
-            args.dashboard,
+            args.dashboard, args.local,
         )
 
     elif args.command == "full":
@@ -1253,7 +1274,7 @@ def main() -> None:
         print("═" * 55)
         run_evaluate(
             args.output, args.evaluators,
-            args.dashboard,
+            args.dashboard, args.local,
         )
 
 
