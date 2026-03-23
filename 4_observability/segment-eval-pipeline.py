@@ -11,6 +11,12 @@ Three modes of operation
 2. evaluate   : JSONL → Foundry eval pipeline (Part 4-7)
 3. full       : csv-import + evaluate combined
 
+Evaluation types (--eval-type)
+------------------------------
+- live    : Send golden queries to SK Backend,
+            collect LLM responses, then evaluate.
+- offline : Use pre-collected result JSONL as-is.
+
 Usage
 -----
 # 1. Parse CSV to evaluation dataset
@@ -18,9 +24,18 @@ python segment-eval-pipeline.py csv-import \
     --csv log/query_data_origin.csv \
     --output log/eval_dataset.jsonl
 
-# 2. Run evaluation on existing dataset
+# 2a. Live: call SK Backend → collect → evaluate
 python segment-eval-pipeline.py evaluate \
-    --data log/eval_dataset.jsonl \
+    --eval-type live \
+    --queries log/golden_user_query_list.jsonl \
+    --server-url http://localhost:8000 \
+    --evaluators groundedness coherence relevance \
+    --sampling 5
+
+# 2b. Offline: evaluate existing results
+python segment-eval-pipeline.py evaluate \
+    --eval-type offline \
+    --result-data log/llm_result_list.jsonl \
     --evaluators groundedness coherence relevance
 
 # 3. Full pipeline (CSV → eval → dashboard)
@@ -125,9 +140,22 @@ BUILTIN_EVALUATORS = {
             "context": "{{item.context}}",
         },
     },
+    "similarity": {
+        "evaluator_name": "builtin.similarity",
+        "data_mapping": {
+            "query": "{{item.query}}",
+            "response": "{{item.response}}",
+            "ground_truth": "{{item.ground_truth}}",
+        },
+    },
 }
 
-ALL_EVALUATOR_NAMES = list(CUSTOM_EVALUATORS) + list(
+# Default evaluator list (similarity excluded by default
+# because it requires ground_truth).
+ALL_EVALUATOR_NAMES = list(CUSTOM_EVALUATORS) + [
+    k for k in BUILTIN_EVALUATORS if k != "similarity"
+]
+ALL_WITH_SIMILARITY = list(CUSTOM_EVALUATORS) + list(
     BUILTIN_EVALUATORS
 )
 
@@ -300,7 +328,7 @@ def csv_import(
             "predicted_method": method,
             "context": context[:MAX_CONTEXT_CHARS],
             "response": response,
-            "ground_truth": "",
+            "ground_truth": response,
             "trace_id": trace_id,
         })
 
@@ -310,17 +338,176 @@ def csv_import(
     with open(out, "w", encoding="utf-8") as f:
         for rec in records:
             f.write(
-                json.dumps(rec, ensure_ascii=False) + "\n"
+                json.dumps(rec, ensure_ascii=False)
+                + "\n"
             )
 
-    print(f"✅ Imported {len(records)} records")
-    print(f"   from {csv_path}")
-    print(f"   to   {output_path}")
+    print(f"\n✅ {len(records)} records → {output_path}")
     if start or end:
         print(
-            f"   filter: {start or '*'} → {end or '*'}"
+            f"   time filter: "
+            f"{start or '*'} → {end or '*'}"
         )
+    print(
+        "\n⚠️  ################ REVIEW REQUIRED #################")
+    print(
+        "  'expected_*' and 'ground_truth' in the eval_result.jsonl file are "
+        "auto-generated from traces."
+    )
+    print(
+        "   Review before running evaluators."
+    )
 
+    return records
+
+
+# ============================================================
+# Section 1b — Live data collection via SK Backend
+# ============================================================
+
+
+def _load_xml_contexts() -> Dict[str, str]:
+    """Load XML context files for evaluation.
+
+    Returns:
+    Dict[str, str]: Intent → XML content mapping.
+    """
+    import xml.etree.ElementTree as ET
+
+    contexts: Dict[str, str] = {}
+    ctx_dir = SCRIPT_DIR / "contexts"
+    ctx_files = {
+        "product_search": "product_contexts.xml",
+        "recommendation": (
+            "recommendation_contexts.xml"
+        ),
+    }
+    for intent, fname in ctx_files.items():
+        path = ctx_dir / fname
+        if path.exists():
+            tree = ET.parse(str(path))
+            contexts[intent] = ET.tostring(
+                tree.getroot(), encoding="unicode"
+            )
+    return contexts
+
+
+def live_collect(
+    queries_path: str,
+    server_url: str,
+    output_path: str,
+    sampling: Optional[int] = None,
+) -> List[Dict[str, Any]]:
+    """Call SK Backend for each golden query.
+
+    Sends queries to POST /chat, collects LLM responses
+    with predicted intent/agent/method, and saves the
+    result as evaluation JSONL.
+
+    Parameters:
+    queries_path (str): Golden query JSONL path.
+    server_url (str): SK Backend base URL.
+    output_path (str): Output JSONL path.
+    sampling (Optional[int]): Limit number of queries.
+
+    Returns:
+    List[Dict[str, Any]]: Collected evaluation records.
+    """
+    import httpx
+
+    # Load golden queries
+    queries: List[Dict[str, str]] = []
+    with open(queries_path, encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                queries.append(
+                    json.loads(line.strip())
+                )
+
+    if sampling and sampling < len(queries):
+        queries = queries[:sampling]
+
+    print(
+        f"🔄 Sending {len(queries)} queries "
+        f"to {server_url}/chat"
+    )
+
+    xml_contexts = _load_xml_contexts()
+    records: List[Dict[str, Any]] = []
+
+    for i, gq in enumerate(queries):
+        try:
+            resp = httpx.post(
+                f"{server_url}/chat",
+                json={"query": gq["query"]},
+                timeout=120.0,
+            )
+            resp.raise_for_status()
+            result = resp.json()
+            p_intent = result["intent"]
+            p_agent = result["agent"]
+            p_method = result["method"]
+            response = result["answer"]
+            context = xml_contexts.get(
+                p_intent, ""
+            )
+        except Exception as e:
+            print(
+                f"   ⚠️ [{i+1}] {str(e)[:60]}"
+            )
+            p_intent = "unknown"
+            p_agent = "unknown"
+            p_method = "unknown"
+            response = ""
+            context = ""
+
+        records.append({
+            "query": gq["query"],
+            "expected_intent": gq.get(
+                "expected_intent", ""
+            ),
+            "expected_agent": gq.get(
+                "expected_agent", ""
+            ),
+            "expected_method": gq.get(
+                "expected_method", ""
+            ),
+            "predicted_intent": p_intent,
+            "predicted_agent": p_agent,
+            "predicted_method": p_method,
+            "context": context[
+                :MAX_CONTEXT_CHARS
+            ],
+            "response": response,
+            "ground_truth": gq.get(
+                "ground_truth", ""
+            ),
+        })
+
+        if (
+            (i + 1) % 10 == 0
+            or (i + 1) == len(queries)
+        ):
+            print(
+                f"   Processed {i+1}/{len(queries)}"
+            )
+
+    # Save results
+    out = Path(output_path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        for rec in records:
+            f.write(
+                json.dumps(
+                    rec, ensure_ascii=False
+                )
+                + "\n"
+            )
+
+    print(
+        f"✅ Collected {len(records)} results "
+        f"→ {output_path}"
+    )
     return records
 
 
@@ -804,12 +991,23 @@ def _local_eval(
                     rec.get(spec["exp"], ""),
                 )
             elif name in BUILTIN_EVALUATORS:
-                row[name] = _llm_score(
-                    rec["query"],
-                    rec.get("response", ""),
-                    rec.get("context", ""),
-                    name,
-                )
+                if name == "similarity":
+                    gt = rec.get(
+                        "ground_truth", ""
+                    )
+                    row[name] = _llm_score(
+                        rec["query"],
+                        rec.get("response", ""),
+                        gt,
+                        "similarity to ground_truth",
+                    )
+                else:
+                    row[name] = _llm_score(
+                        rec["query"],
+                        rec.get("response", ""),
+                        rec.get("context", ""),
+                        name,
+                    )
             summary[name].append(row.get(name, 0.0))
         rows.append(row)
         n = len(eval_records)
@@ -963,6 +1161,7 @@ def run_evaluate(
     evaluator_names: List[str],
     dashboard_path: Optional[str] = None,
     local_only: bool = False,
+    sampling: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Run the full evaluation pipeline (Parts 4-7).
 
@@ -971,6 +1170,7 @@ def run_evaluate(
     evaluator_names (List[str]): Evaluators to run.
     dashboard_path (Optional[str]): Dashboard output.
     local_only (bool): Skip Foundry, run locally.
+    sampling (Optional[int]): Limit records to evaluate.
 
     Returns:
     Dict[str, Any]: Evaluation summary payload.
@@ -988,22 +1188,47 @@ def run_evaluate(
         for line in f:
             if line.strip():
                 records.append(json.loads(line.strip()))
-    print(f"📊 Loaded {len(records)} records")
+
+    if sampling and sampling < len(records):
+        records = records[:sampling]
+        print(
+            f"📊 Loaded {len(records)} records"
+            f" (sampled from file)"
+        )
+    else:
+        print(f"📊 Loaded {len(records)} records")
 
     # Validate evaluator names
+    if "all" in evaluator_names:
+        evaluator_names = list(ALL_WITH_SIMILARITY)
     valid = [
         e for e in evaluator_names
-        if e in ALL_EVALUATOR_NAMES
+        if e in ALL_WITH_SIMILARITY
     ]
     invalid = set(evaluator_names) - set(valid)
     if invalid:
         print(
             f"⚠️  Unknown evaluators: {invalid}. "
-            f"Available: {ALL_EVALUATOR_NAMES}"
+            f"Available: {ALL_WITH_SIMILARITY}"
         )
     if not valid:
         print("❌ No valid evaluators specified.")
         sys.exit(1)
+
+    # Validate ground_truth for similarity
+    if "similarity" in valid:
+        has_gt = any(
+            rec.get("ground_truth", "").strip()
+            for rec in records
+        )
+        if not has_gt:
+            print(
+                "❌ similarity evaluator requires "
+                "ground_truth field in data. "
+                "Use golden_user_query_list.jsonl "
+                "with reviewed ground_truth."
+            )
+            sys.exit(1)
 
     print(
         f"📋 Evaluators: {valid}"
@@ -1013,6 +1238,10 @@ def run_evaluate(
         print("\n── Local-only mode (API key) ──")
         print("   Skipping Parts 4-5 (Foundry).")
         from openai import AzureOpenAI
+
+        eval_obj = None
+        eval_run = None
+        foundry_mode = False
 
         api_key = os.environ.get("AZURE_OPENAI_API_KEY")
         endpoint = os.environ.get(
@@ -1195,16 +1424,44 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Run eval pipeline (Part 4-7)",
     )
     p_eval.add_argument(
-        "--data", required=True,
-        help="Path to evaluation JSONL dataset",
+        "--eval-type",
+        choices=["live", "offline"],
+        default="offline",
+        help=(
+            "live: call SK Backend then evaluate. "
+            "offline: evaluate existing JSONL."
+        ),
+    )
+    p_eval.add_argument(
+        "--queries", default=None,
+        help=(
+            "Golden query JSONL (live mode). "
+            "Default: log/golden_user_query_list.jsonl"
+        ),
+    )
+    p_eval.add_argument(
+        "--server-url", default=None,
+        help=(
+            "SK Backend URL (live mode). "
+            "Default: http://localhost:8000"
+        ),
+    )
+    p_eval.add_argument(
+        "--result-data", default=None,
+        help="Result JSONL path (offline mode)",
     )
     p_eval.add_argument(
         "--evaluators", nargs="+",
-        default=["groundedness", "coherence", "relevance"],
+        default=ALL_EVALUATOR_NAMES,
         help=(
-            f"Evaluators to run: "
+            "Evaluators to run "
+            "(use 'all' to include similarity): "
             f"{ALL_EVALUATOR_NAMES}"
         ),
+    )
+    p_eval.add_argument(
+        "--sampling", type=int, default=None,
+        help="Limit number of records to evaluate",
     )
     p_eval.add_argument(
         "--dashboard", default=None,
@@ -1226,9 +1483,10 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p_full.add_argument(
         "--evaluators", nargs="+",
-        default=["groundedness", "coherence", "relevance"],
+        default=ALL_EVALUATOR_NAMES,
         help=(
-            f"Evaluators to run: "
+            "Evaluators to run "
+            "(use 'all' to include similarity): "
             f"{ALL_EVALUATOR_NAMES}"
         ),
     )
@@ -1249,6 +1507,10 @@ def _build_parser() -> argparse.ArgumentParser:
     p_full.add_argument(
         "--dashboard", default=None,
         help="Output HTML dashboard path",
+    )
+    p_full.add_argument(
+        "--sampling", type=int, default=None,
+        help="Limit number of records to evaluate",
     )
     p_full.add_argument(
         "--local", action="store_true",
@@ -1274,10 +1536,59 @@ def main() -> None:
         )
 
     elif args.command == "evaluate":
-        run_evaluate(
-            args.data, args.evaluators,
-            args.dashboard, args.local,
+        eval_type = getattr(
+            args, "eval_type", "offline"
         )
+
+        if eval_type == "live":
+            queries = getattr(
+                args, "queries", None
+            ) or str(
+                LOG_DIR
+                / "golden_user_query_list.jsonl"
+            )
+            server = getattr(
+                args, "server_url", None
+            ) or "http://localhost:8000"
+            result_path = str(
+                LOG_DIR / "llm_result_list.jsonl"
+            )
+
+            print("═" * 55)
+            print(
+                "Phase 1: Live Collection "
+                "(SK Backend)"
+            )
+            print("═" * 55)
+            live_collect(
+                queries, server, result_path,
+                args.sampling,
+            )
+            print()
+            print("═" * 55)
+            print("Phase 2: Evaluation")
+            print("═" * 55)
+            run_evaluate(
+                result_path, args.evaluators,
+                args.dashboard, args.local,
+                args.sampling,
+            )
+
+        else:  # offline
+            result_data = getattr(
+                args, "result_data", None
+            )
+            if not result_data:
+                print(
+                    "❌ --result-data is required "
+                    "for offline mode."
+                )
+                sys.exit(1)
+            run_evaluate(
+                result_data, args.evaluators,
+                args.dashboard, args.local,
+                args.sampling,
+            )
 
     elif args.command == "full":
         print("═" * 55)
@@ -1294,6 +1605,7 @@ def main() -> None:
         run_evaluate(
             args.output, args.evaluators,
             args.dashboard, args.local,
+            args.sampling,
         )
 
 

@@ -219,4 +219,6 @@ routing_results_*
 grafana_dashboard.json
 
 4_observability/log/*
-!4_observability/log/query_data_1.csv
+!4_observability/log/application_insight_data_sample.csv
+!4_observability/log/offline_golden_query_response.jsonl
+!4_observability/log/live_golden_user_query_list.jsonl

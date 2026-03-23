@@ -355,6 +355,7 @@ report_url → Foundry Portal + HTML Dashboard
 | 4a | `groundedness` | Builtin | 1–5 | Response faithfulness to XML context |
 | 4b | `coherence` | Builtin | 1–5 | Response logical consistency |
 | 4c | `relevance` | Builtin | 1–5 | Response relevance to user query |
+| 4d | `similarity` | Builtin | 1–5 | Response similarity to ground_truth |
 
 ### Key SDK APIs Used
 
@@ -421,30 +422,77 @@ llm_result_list.jsonl
 | `evaluate` | Run Foundry eval pipeline (Parts 4-7) | JSONL dataset | Summary JSON + HTML dashboard |
 | `full` | Combined: csv-import → evaluate | CSV file | All outputs |
 
+### Evaluation Types (`--eval-type`)
+
+The `evaluate` command supports two evaluation types:
+
+| Type | Description | Input | Flow |
+|------|-------------|-------|------|
+| `live` | Call SK Backend in real-time to collect LLM responses, then evaluate | Golden query JSONL + server URL | Queries → POST /chat → results JSONL → evaluate |
+| `offline` | Evaluate pre-collected results (no server call) | Result JSONL | Read file → evaluate |
+
 ### Usage
 
 ```bash
 cd 4_observability
 
-# Mode 1: Parse CSV to evaluation dataset
+# ── csv-import: Parse App Insights CSV ──
 python segment-eval-pipeline.py csv-import \
-    --csv log/query_data_origin.csv \
+    --csv log/application_insight_data_sample.csv \
     --output log/eval_dataset.jsonl \
     --start "2026-03-09T14:00" \
     --end "2026-03-09T15:00"
+```
 
-# Mode 2: Run evaluation on existing dataset
+> **Domain expert review required after `csv-import`**:
+> The output JSONL contains `expected_*` fields (copied from predicted values) and `ground_truth` (copied from the LLM response). A **domain expert must review and correct** these fields before using custom evaluators.
+>
+> **Recommended workflow**:
+> 1. Run `csv-import` → generates `eval_dataset.jsonl`
+> 2. Domain expert reviews and corrects `expected_intent`, `expected_agent`, `expected_method`, and `ground_truth`
+> 3. Save the reviewed file as `golden_user_query_ground_truth_list.jsonl`
+> 4. Use the reviewed file with `evaluate --eval-type offline --result-data`
+>
+> Builtin evaluators (`groundedness`, `coherence`, `relevance`) work without review.
+
+```bash
+# ── evaluate (live): SK Backend → collect → evaluate ──
+# Requires sk_backend running on port 8000
 python segment-eval-pipeline.py evaluate \
-    --data log/eval_dataset.jsonl \
-    --evaluators groundedness coherence relevance
+    --eval-type live \
+    --queries log/live_golden_user_query_list.jsonl \
+    --server-url http://localhost:8000 \
+    --evaluators intent_accuracy agent_relevance method_relevance groundedness coherence relevance \
+    --sampling 5
 
-# Mode 3: Full pipeline (CSV → eval → dashboard)
+# ── evaluate (live + local): API key only, no Foundry ──
+python segment-eval-pipeline.py evaluate \
+    --eval-type live \
+    --queries log/live_golden_user_query_list.jsonl \
+    --evaluators all \
+    --sampling 10 \
+    --local
+
+# ── evaluate (offline): existing result JSONL ──
+python segment-eval-pipeline.py evaluate \
+    --eval-type offline \
+    --result-data log/offline_golden_query_response.jsonl \
+    --evaluators all
+
+# ── evaluate (offline + sampling): limit records ──
+python segment-eval-pipeline.py evaluate \
+    --eval-type offline \
+    --result-data log/eval_dataset.jsonl \
+    --evaluators groundedness coherence \
+    --sampling 20
+
+# ── full: CSV → eval → dashboard (combined) ──
 python segment-eval-pipeline.py full \
     --csv log/query_data_origin.csv \
-    --evaluators intent_accuracy agent_relevance \
-        groundedness coherence relevance \
+    --evaluators all \
     --start "2026-03-09T14:00" \
-    --end "2026-03-09T15:00"
+    --end "2026-03-09T15:00" \
+    --sampling 50
 ```
 
 ### Available Evaluators
@@ -457,6 +505,7 @@ python segment-eval-pipeline.py full \
 | `groundedness` | Builtin | 1–5 | Response faithfulness to context |
 | `coherence` | Builtin | 1–5 | Response logical consistency |
 | `relevance` | Builtin | 1–5 | Response relevance to query |
+| `similarity` | Builtin | 1–5 | Response similarity to ground_truth (requires `ground_truth` field) |
 
 ### CSV Trace Parsing
 
@@ -479,36 +528,93 @@ segment-eval-pipeline csv-import
   --end         End time filter, ISO format (optional)
 
 segment-eval-pipeline evaluate
-  --data        Path to evaluation JSONL (required)
-  --evaluators  Space-separated evaluator names (default: groundedness coherence relevance)
+  --eval-type   live | offline (default: offline)
+  --queries     Golden query JSONL path (live mode, default: log/golden_user_query_list.jsonl)
+  --server-url  SK Backend URL (live mode, default: http://localhost:8000)
+  --result-data Result JSONL path (offline mode, required for offline)
+  --evaluators  Space-separated evaluator names (default: all except similarity).
+              Use 'all' to include similarity (requires ground_truth).
+  --sampling    Limit number of records (optional, omit for all)
   --dashboard   Output HTML dashboard path (optional)
+  --local       Run locally with API key (skip Foundry upload)
 
 segment-eval-pipeline full
   --csv         Path to App Insights CSV export (required)
-  --evaluators  Space-separated evaluator names (default: groundedness coherence relevance)
+  --evaluators  Space-separated evaluator names (default: all except similarity).
+              Use 'all' to include similarity (requires ground_truth).
   --start       Start time filter (optional)
   --end         End time filter (optional)
   --output      Intermediate JSONL path (optional)
+  --sampling    Limit number of records (optional)
   --dashboard   Output HTML dashboard path (optional)
+  --local       Run locally with API key (skip Foundry upload)
 ```
 
-### Pipeline Flow
+### Golden Dataset Creation Pipeline
 
 ```
-App Insights CSV (query_data_origin.csv)
+Application Insights (Azure Portal)
          │
-    csv-import (group by dd.trace_id)
-         │
-         ▼
-eval_dataset.jsonl (224 records)
-         │
-    evaluate
-         │
-         ├── Part 4: Register custom evaluators in Foundry
-         ├── Part 5: Create eval + run via Evals API
-         ├── Part 6: Poll results / local fallback
-         └── Part 7: Generate HTML dashboard
+    Export as CSV
          │
          ▼
-eval_summary.json + eval_dashboard.html
+application_insight_data_sample.csv
+         │
+    csv-import (segment-eval-pipeline.py)
+         │
+         ▼
+eval_dataset.jsonl
+  (expected_* = predicted, ground_truth = response)
+         │
+         ▼
+┌────────────────────────────┐
+│   Domain Expert            │
+│   Review & Correct         │
+│   ・expected_intent/agent  │
+│   ・expected_method        │
+│   ・ground_truth           │
+└────────────┬───────────────┘
+             ▼
+golden_user_query_list.jsonl
+  (verified ground-truth labels)
+```
+
+### Evaluation Pipeline Flow
+
+**Live mode** calls the SK Backend to generate fresh LLM responses, then evaluates them.
+**Offline mode** skips the server call and evaluates a pre-collected result JSONL directly.
+
+```
+┌─── live mode ───────────────────────────────┐
+│                                              │
+│  golden_user_query_list.jsonl                │
+│           │                                  │
+│  evaluate --eval-type live                   │
+│  (POST /chat → SK Backend)                   │
+│           │                                  │
+│           ▼                                  │
+│  llm_result_list.jsonl                       │
+│  (predicted_* + context + response)          │
+│                                              │
+└──────────┬───────────────────────────────────┘
+           │
+           │  ┌─── offline mode ──────────────┐
+           │  │                                │
+           │  │  pre-collected result JSONL     │
+           │  │  (e.g. eval_dataset.jsonl)     │
+           │  │                                │
+           │  └──────────┬─────────────────────┘
+           │             │
+           └──────┬──────┘
+                  │
+                  ▼
+           Evaluation Engine
+                  │
+           ├── Part 4: Register evaluators
+           ├── Part 5: Foundry eval run
+           ├── Part 6: Collect results
+           └── Part 7: HTML dashboard
+                  │
+                  ▼
+  eval_summary.json + eval_dashboard.html
 ```
