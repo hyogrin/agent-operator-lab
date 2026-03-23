@@ -673,10 +673,10 @@ def _build_testing_criteria(
                 },
                 "data_mapping": {
                     spec["pred"]: (
-                        f"{{{{item.{spec['pred']}}}}}"
+                        f"{{{{{spec['pred']}}}}}"
                     ),
                     spec["exp"]: (
-                        f"{{{{item.{spec['exp']}}}}}"
+                        f"{{{{{spec['exp']}}}}}"
                     ),
                 },
             })
@@ -728,7 +728,13 @@ def _run_eval(
         item_schema={
             "type": "object",
             "properties": {
-                k: {"type": "string"}
+                k: {
+                    "anyOf": [
+                        {"type": "string"},
+                        {"type": "array",
+                         "items": {"type": "object"}},
+                    ]
+                }
                 for k in [
                     "query",
                     "expected_intent",
@@ -742,8 +748,9 @@ def _run_eval(
                     "ground_truth",
                 ]
             },
-            "required": ["query"],
+            "required": ["query", "response"],
         },
+        include_sample_schema=True,
     )
 
     eval_obj = openai_client.evals.create(
@@ -753,39 +760,32 @@ def _run_eval(
     )
     print(f"   📝 Eval created: {eval_obj.id}")
 
-    # Build JSONL upload
-    upload_path = LOG_DIR / "eval_upload.jsonl"
-    with open(upload_path, "w", encoding="utf-8") as f:
-        for rec in eval_records:
-            ctx = rec.get("context", "")
-            if len(ctx) > MAX_CONTEXT_CHARS:
-                ctx = ctx[:MAX_CONTEXT_CHARS]
-            row = {"item": {
-                k: rec.get(k, "")
-                for k in [
-                    "query",
-                    "expected_intent",
-                    "predicted_intent",
-                    "expected_agent",
-                    "predicted_agent",
-                    "expected_method",
-                    "predicted_method",
-                    "response",
-                    "ground_truth",
-                ]
-            }}
-            row["item"]["context"] = ctx
-            f.write(
-                json.dumps(row, ensure_ascii=False) + "\n"
-            )
+    # Build inline content for SourceFileContent
+    inline_content = []
+    for rec in eval_records:
+        ctx = rec.get("context", "")
+        if len(ctx) > MAX_CONTEXT_CHARS:
+            ctx = ctx[:MAX_CONTEXT_CHARS]
+        item = {
+            k: rec.get(k, "")
+            for k in [
+                "query",
+                "expected_intent",
+                "predicted_intent",
+                "expected_agent",
+                "predicted_agent",
+                "expected_method",
+                "predicted_method",
+                "response",
+                "ground_truth",
+            ]
+        }
+        item["context"] = ctx
+        inline_content.append(
+            jp.SourceFileContentContent(item=item)
+        )
 
     try:
-        with open(upload_path, "rb") as f:
-            uploaded = openai_client.files.create(
-                file=f, purpose="evals"
-            )
-        print(f"   📤 File uploaded: {uploaded.id}")
-
         eval_run = openai_client.evals.runs.create(
             eval_id=eval_obj.id,
             name=f"Segment Run {eval_uuid}",
@@ -795,8 +795,9 @@ def _run_eval(
             },
             data_source=jp.CreateEvalJSONLRunDataSourceParam(
                 type="jsonl",
-                source=jp.SourceFileID(
-                    type="file_id", id=uploaded.id,
+                source=jp.SourceFileContent(
+                    type="file_content",
+                    content=inline_content,
                 ),
             ),
         )
