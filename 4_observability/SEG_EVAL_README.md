@@ -1,16 +1,3 @@
----
-post_title: "Segment Evaluation Pipeline"
-author1: "hyogrin"
-post_slug: "segment-evaluation-pipeline"
-microsoft_alias: "hyogrin"
-featured_image: ""
-categories: []
-tags: ["evaluation", "azure-ai-foundry", "semantic-kernel", "application-insights"]
-ai_note: "AI-assisted documentation"
-summary: "Evaluation pipeline for the SK Orchestrator Backend — notebook-based and CLI-based evaluation using Azure AI Foundry Evals API with custom and builtin evaluators."
-post_date: "2026-03-25"
----
-
 ## Evaluation Pipeline
 
 This document covers the evaluation pipeline for the
